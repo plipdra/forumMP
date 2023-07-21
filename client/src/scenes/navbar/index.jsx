@@ -39,8 +39,8 @@ const Navbar = () => {
     const alt = theme.palette.background.alt;
 
     // const username = `${user.username}`;
-    // const username = "fake";
-    const username = null;
+    const username = "fake";
+    // const username = null;
 
     if (username) {
         return <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -59,8 +59,20 @@ const Navbar = () => {
                 >
                     Sphere
                 </Typography>
-                {isNonMobileScreens && (
+                {isNonMobileScreens ? (
                     <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
+                        <InputBase placeholder="Search..." />
+                        <IconButton>
+                            <Search />
+                        </IconButton>
+                    </FlexBetween>
+                ) : (
+                    <FlexBetween 
+                        backgroundColor={neutralLight} 
+                        borderRadius="9px" 
+                        gap="3rem" 
+                        padding="0.1rem 1.5rem"
+                    >
                         <InputBase placeholder="Search..." />
                         <IconButton>
                             <Search />
@@ -117,13 +129,14 @@ const Navbar = () => {
             {!isNonMobileScreens && isMobileMenuToggled && (
                 <Box 
                 position="fixed"
+                top="5.9%"
                 right="0"
                 bottom="0"
-                height="100%"
+                height="25%"
                 zIndex="10"
                 maxWidth="500px"
                 minWidth="300px"
-                backgroundColor={background}
+                backgroundColor={palette.neutral.light}
                 >
                 {/* Close Icon */}   
                     <Box display="flex" justifyContent="flex-end" p="1rem">
@@ -156,7 +169,7 @@ const Navbar = () => {
                             <Select
                                 value={username}
                                 sx={{
-                                    backgroundColor: neutralLight,
+                                    backgroundColor: palette.background.alt,
                                     width: "150px",
                                     borderRadius: "0.25rem",
                                     p: "0.25rem 1rem",
@@ -165,7 +178,7 @@ const Navbar = () => {
                                         width: "3rem"
                                     },
                                     "& .MuiSelect-select:focus": {
-                                        backgroundColor: neutralLight
+                                        backgroundColor: palette.background.alt
                                     }
                                 }}    
                                 input={<InputBase />}
@@ -197,7 +210,14 @@ const Navbar = () => {
                 >
                     Sphere
                 </Typography>
-                {isNonMobileScreens && (
+                {isNonMobileScreens ? (
+                    <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
+                        <InputBase placeholder="Search..." />
+                        <IconButton>
+                            <Search />
+                        </IconButton>
+                    </FlexBetween>
+                ) : (
                     <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
                         <InputBase placeholder="Search..." />
                         <IconButton>
@@ -240,6 +260,58 @@ const Navbar = () => {
             )}
 
             {/* Mobile Nav */}
+            {!isNonMobileScreens && isMobileMenuToggled && (
+                <Box 
+                position="fixed"
+                top="5.9%"
+                right="0"
+                bottom="0"
+                height="25%"
+                zIndex="10"
+                maxWidth="500px"
+                minWidth="300px"
+                backgroundColor={palette.neutral.light}
+                >
+                {/* Close Icon */}   
+                    <Box display="flex" justifyContent="flex-end" p="1rem">
+                        <IconButton 
+                            onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+                        >
+                            <Close />
+                        </IconButton>
+                    </Box>
+
+                    {/* Menu Items */}
+                    <FlexBetween 
+                        display="flex" 
+                        flexDirection="column" 
+                        justifyContent="center" 
+                        alignItems="center" 
+                        gap="3rem"
+                    >
+                        <IconButton 
+                            onClick={() => dispatch(setMode())} 
+                            sx={{ fontSize: "25px" }}
+                        >
+                            {theme.palette.mode === "dark" ? (
+                                <DarkMode sx={{ fontSize: "25px" }} />
+                            ) : (
+                                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                            )}
+                        </IconButton>
+                        <Button
+                            sx={{
+                                backgroundColor: palette.primary.main,
+                                color: palette.background.alt,
+                                "&:hover": { color: palette.primary.main },
+                            }}
+                            onClick={() => navigate("/")}
+                        >
+                            Log In
+                        </Button>
+                    </FlexBetween>
+                </Box>
+            )}
         </FlexBetween>      
     }
 

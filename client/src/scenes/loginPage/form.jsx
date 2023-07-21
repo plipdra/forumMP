@@ -50,8 +50,10 @@ const Form = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
+    console.log(isLogin);
 
     const register = async (values, onSubmitProps) => {
+        console.log("registering...");
         const formData = new FormData(); // allows to send form info w img
         for (let value in values) {
             formData.append(value, values[value])
@@ -74,6 +76,7 @@ const Form = () => {
     };
 
     const login = async (values, onSubmitProps) => {
+        console.log("logging in...");
         const loggedInResponse = await fetch(
             "http://localhost:3001/auth/login",
             {

@@ -32,7 +32,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     useEffect(() => {
         getUser();
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps (when we enter the page, getUser will be called)
+    }, []) 
 
     if (!user) {
         return null;
@@ -47,10 +47,43 @@ const UserWidget = ({ userId, picturePath }) => {
         <WidgetWrapper>
             {/* First Row */}
             <FlexBetween
-                
+                gap="0.5rem"
+                pb="1.1rem"
+                onClick={() => navigate(`/profile/${userId}`)}
             >
+                <FlexBetween gap="1rem">
+                    <UserImage image={picturePath} />
+                    <Box>
+                        <Typography
+                            variant="h4"
+                            color={dark}
+                            fontWeight="500"
+                            sx={{
+                                "&:hover": {
+                                    color: palette.primary.light,
+                                    cursor: "pointer"
+                                }
+                            }}
+                        >
+                            {username}
+                        </Typography>
+                        <Typography>Description</Typography>
+                    </Box>
+                    <ManageAccountsOutlined />
+                </FlexBetween>
+
+                <Divider />
+
+                {/* Second Row */}
+                <Box p="1rem 0">
+                    <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+                        <Typography>Tags</Typography>
+                    </Box>
+                </Box>
 
             </FlexBetween>
         </WidgetWrapper>
     )
 }
+
+export default UserWidget;
