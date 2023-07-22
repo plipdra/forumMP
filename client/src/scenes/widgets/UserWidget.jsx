@@ -3,7 +3,7 @@ import {
     EditOutlined,
 
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
+import { Box, Typography, Divider, useTheme, Avatar } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -51,6 +51,7 @@ const UserWidget = ({ userId, picturePath }) => {
                 pb="1.1rem"
             >
                 <FlexBetween gap="1rem">
+                    {/* <UserImage image={picturePath} /> */}
                     <UserImage image={picturePath} />
                     <Box>
                         <Typography

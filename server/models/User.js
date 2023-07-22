@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema(
             min: 4,
             max: 20,
         },
+        about: {
+            type: String,
+            required: false,
+        },
         email: {
             type: String,
             required: true,
@@ -23,7 +27,7 @@ const UserSchema = new mongoose.Schema(
             type: String,
             default: "",
         },
-        pronouns: String,
+        pronouns: String, // lol idk what to do wid dis muna di ko pa to iniimplement
     },
     { timestamps: true }
 );

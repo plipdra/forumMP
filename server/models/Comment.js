@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const PostSchema = new mongoose.Schema(
+// TODO?: EDIT PA?
+
+const CommentSchema = new mongoose.Schema(
     {
         userId: {
             type: String,
@@ -10,25 +12,15 @@ const PostSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        title: {
+        commentId: {
             type: String,
             required: true,
-            max: 50,
         },
-        description: {
+        text: {
             type: String,
             required: true,
         },
         userPicturePath: String,
-        picturePath: String,
-        upvotes: {
-            type: Map,
-            of: Boolean,
-        },
-        downvotes: {
-            type: Map,
-            of: Boolean,
-        },
         comments: {
             type: Array,
             default: []
@@ -37,5 +29,5 @@ const PostSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Post = mongoose.model("Post", PostSchema);
-export default Post;
+const Comment = mongoose.model("Comment", CommentSchema);
+export default Comment;

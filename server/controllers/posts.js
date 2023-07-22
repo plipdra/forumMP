@@ -1,6 +1,8 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 
+// TODO: ADD EDIT POST
+
 /* CREATE */
 export const createPost = async (req, res) => {
     try {

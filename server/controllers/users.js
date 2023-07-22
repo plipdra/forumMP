@@ -1,5 +1,7 @@
 import User from "../models/User.js";
 
+// TODO: ADD EDIT USER? LIKE YUNG USERNAME AND ABOUT PATI IMG?
+
 /* READ */
 export const getUser = async (req, res) => {
     try {

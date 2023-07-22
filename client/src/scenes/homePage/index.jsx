@@ -8,7 +8,8 @@ const HomePage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const user = useSelector((state) => state.user);
 
-    return <Box>
+    return (
+    <Box>
         <Navbar />
         {user && (
             <Box
@@ -26,7 +27,7 @@ const HomePage = () => {
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
                     <CreatePostWidget picturePath={user.picturePath} />
-
+                    
                 </Box>
                 {isNonMobileScreens && (
                     <Box flexBasis="26%">
@@ -36,7 +37,7 @@ const HomePage = () => {
         )}
 
     </Box>
-
+    );
 };
 
 export default HomePage;
