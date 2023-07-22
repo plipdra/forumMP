@@ -6,15 +6,17 @@ import User from "../models/User.js";
 /* CREATE */
 export const createPost = async (req, res) => {
     try {
-        const { userId, description, picturePath } = req.body;
+        const { userId, username, title, description, picturePath } = req.body;
         const user = await User.findById(userId);
         const newPost = new Post({
             userId,
+            username,
             title,
             description,
             userPicturePath: user.picturePath,
             picturePath,
-            votes: {},
+            upvotes: {},
+            downvotes: {},
             comments: []
         })
         await newPost.save();
@@ -22,6 +24,7 @@ export const createPost = async (req, res) => {
         const post = await Post.find();
         res.status(201).json(post);
     } catch (err) {
+        console.log("here");
         res.status(409).json({ message: err.message })
     }
 }

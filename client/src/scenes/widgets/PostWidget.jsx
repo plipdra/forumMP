@@ -5,7 +5,7 @@ import {
     ThumbDown,
     ChatOutlined,
 } from "@mui/icons-material";
-import { Card, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import { Card, Divider, IconButton, Typography, useTheme, Box } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -64,22 +64,25 @@ const PostWidget = ({
 
     return (
         <WidgetWrapper m="2rem 0">
-            <FlexBetween>
-                <UserImage image={userPicturePath} />
-                <Typography
-                    color={main}
-                    variant="h5"
-                    fontWeight="500"
-                    sx={{
-                        "&:hover": {
-                            color: palette.primary.light,
-                            cursor: "pointer",
-                        },
-                    }}
-                >
-                    {username}
-                </Typography>                
-            </FlexBetween>
+            <Box>
+                <FlexBetween>
+                    <UserImage image={userPicturePath} />
+                    <Typography
+                        color={main}
+                        variant="h5"
+                        fontWeight="500"
+                        sx={{
+                            "&:hover": {
+                                color: palette.primary.light,
+                                cursor: "pointer",
+                            },
+                        }}
+                    >
+                        {username}
+                    </Typography> 
+                </FlexBetween>
+                               
+            </Box>
             <Typography
                 color={main}
                 variant="h2"
