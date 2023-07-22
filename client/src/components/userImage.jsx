@@ -8,12 +8,12 @@ const UserImage = ({ image, size = "60px" }) => {
     //             width={size}
     //             height={size}
     //             alt="user"
-    //             src={`http//localhost:3001/assets/${image}`}
+    //             src={`http://localhost:3001/assets/${image}`}
     //         />
     //     </Box>
     // )
     return (
-        <Avatar src={`http//localhost:3001/public/assets/${image}`} />
+        <Avatar src={`http://localhost:3001/assets/${image}`} />
     )
 }
 

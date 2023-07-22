@@ -10,6 +10,6 @@ router.get("/:userId/posts", verifyToken, getUserPosts);
 
 /* UPDATE */
 router.patch("/:id/upvote", verifyToken, upvotePost);
-router.patch("/:id/upvote", verifyToken, downvotePost);
+router.patch("/:id/downvote", verifyToken, downvotePost);
 
 export default router;
