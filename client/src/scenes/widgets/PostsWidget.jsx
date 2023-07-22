@@ -7,6 +7,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
+    let isTherePost = false;
 
     const getPosts = async () => {
         const response = await fetch(`http://localhost:3001/posts`, {
@@ -15,6 +16,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
+        console.log(posts, "here");
     };
 
     const getUserPosts = async () => {
@@ -24,6 +26,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
+        console.log(posts, "there");
     };
 
     useEffect(() => {
@@ -34,8 +37,23 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         }
     }, []);
 
-    if (!posts){
-        return;
+    for (let post of posts) {
+        if (post.userId === userId) {
+            // then may post
+            isTherePost = true;
+            break;
+            
+        } else {
+            // then wala
+            isTherePost = false;
+        }        
+    }
+
+    if (!isTherePost){
+        console.log("hey?");
+        return (<h1>ala boii?</h1>);
+    } else {
+        console.log("helo");
     }
 
     return (
