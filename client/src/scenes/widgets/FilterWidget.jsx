@@ -29,6 +29,7 @@ const FilterWidget = () => {
         variant="h4"
         color={dark}
         fontWeight="500"
+        mb="1rem"
         sx={{
             "&:hover": {
                 color: medium,
@@ -42,6 +43,7 @@ const FilterWidget = () => {
         variant="h4"
         color={dark}
         fontWeight="500"
+        mb="1rem"
         sx={{
             "&:hover": {
                 color: medium,

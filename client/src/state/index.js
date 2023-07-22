@@ -5,6 +5,7 @@ const initialState = {
     user: null,
     token: null,
     posts: [],
+    filter: "posts",
 };
 
 export const authSlice = createSlice({
@@ -35,7 +36,8 @@ export const authSlice = createSlice({
             state.posts = updatedPosts;
         },
         setFilterProfile:(state) => {
-            state.mode = state.mode === "posts" ? "comments":"posts";
+            state.filter = state.filter === "posts" ? "comments":"posts";
+            console.log(state.filter);
         }
     }
 })

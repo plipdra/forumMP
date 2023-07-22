@@ -112,7 +112,7 @@ const PostWidget = ({
                     <FlexBetween gap="0.3rem"> {/* upvote */}
                         <IconButton onClick={patchUpvote}>
                             { isUpvoted ? (
-                                <ThumbUp sx={{ color: primary }} />
+                                <ThumbUp />
                             ) : (
                                 <ThumbUpOffAlt />
                             )}
@@ -125,7 +125,7 @@ const PostWidget = ({
                     <FlexBetween gap="0.3rem"> {/* downvote */}
                         <IconButton onClick={patchDownvote}>
                             { isDownvoted ? (
-                                <ThumbDown sx={{ color: primary }} />
+                                <ThumbDown />
                             ) : (
                                 <ThumbDownOffAlt />
                             )}
