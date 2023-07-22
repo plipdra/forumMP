@@ -32,7 +32,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     useEffect(() => {
         getUser();
-    }, []) 
+    }, [])
 
     if (!user) {
         return null;
@@ -83,14 +83,7 @@ const UserWidget = ({ userId, picturePath }) => {
                 />
             </FlexBetween>
 
-            <Divider />
 
-            {/* Second Row */}
-            <Box p="1rem 0">
-                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                    <Typography>Tags</Typography>
-                </Box>
-            </Box>
 
         </WidgetWrapper>
     )

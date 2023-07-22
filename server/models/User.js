@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema(
         picturePath: {
             type: String,
             default: "",
+            required: false,
         },
         pronouns: String, // lol idk what to do wid dis muna di ko pa to iniimplement
     },

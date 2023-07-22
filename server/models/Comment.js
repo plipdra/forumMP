@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// TODO?: EDIT PA?
 
 const CommentSchema = new mongoose.Schema(
     {
@@ -24,6 +23,10 @@ const CommentSchema = new mongoose.Schema(
         comments: {
             type: Array,
             default: []
+        },
+        parentCommentId: {
+            type: String,
+            required: true,
         }
     },
     { timestamps: true }

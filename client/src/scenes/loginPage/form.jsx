@@ -20,7 +20,7 @@ const registerSchema = yup.object().shape({
     username: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
-    picture: yup.string().required("required"),
+    picture: yup.string().notRequired(),
 });
 
 const loginSchema = yup.object().shape({
@@ -56,6 +56,9 @@ const Form = () => {
         for (let value in values) {
             formData.append(value, values[value])
         }
+
+        //when a pic is not uploaded, structure does not have picture variable
+        console.log(values)
         formData.append('picturePath', values.picture.name);
 
         const savedUserResponse = await fetch(
@@ -105,7 +108,7 @@ const Form = () => {
         <Formik
             onSubmit={handleFormSubmit}
             initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
-            validationSchema={isLogin ? loginSchema : registerSchema}    
+            validationSchema={isLogin ? loginSchema : registerSchema}
         >
             {({
                 values,
@@ -137,7 +140,7 @@ const Form = () => {
                                     <Dropzone
                                         acceptedFiles=".jpg .jpeg .png"
                                         multiple={false}
-                                        onDrop={(acceptedFiles) => 
+                                        onDrop={(acceptedFiles) =>
                                             setFieldValue("picture", acceptedFiles[0])
                                         }
                                     >
@@ -230,8 +233,8 @@ const Form = () => {
                                 },
                             }}
                         >
-                            {isLogin 
-                            ? "Don't have an Account? Register here!" 
+                            {isLogin
+                            ? "Don't have an Account? Register here!"
                             : "Already have an Account? Log in here!"}
                         </Typography>
                     </Box>
