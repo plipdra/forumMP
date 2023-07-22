@@ -32,7 +32,7 @@ const initialValuesRegister = {
     username: "",
     email: "",
     password: "",
-    picture: "./assets/defaultUser.png",
+    picture: "",
 }
 
 const initialValuesLogin = {
@@ -189,6 +189,7 @@ const Form = () => {
                         />
                         <TextField
                             label="password"
+                            type="password"
                             onBlur={handleBlur}
                             onChange={handleChange}
                             value={values.password}
