@@ -23,7 +23,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             headers: { Authorization: `Bearer ${token}`},
         });
         const data = await response.json();
-        dispatch(setPosts({ posts: data }));        
+        dispatch(setPosts({ posts: data }));
     };
 
     useEffect(() => {
@@ -33,7 +33,11 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             getPosts();
         }
     }, []);
-    
+
+    if (!posts){
+        return;
+    }
+
     return (
         <>
             {posts.map(

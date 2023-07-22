@@ -52,7 +52,7 @@ const CreatePostWidget = ({ picturePath }) => {
         <WidgetWrapper>
             <FlexBetween gap="1.5rem">
                 <UserImage image={picturePath} />
-                <InputBase 
+                <InputBase
                     placeholder="Title..."
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
@@ -65,7 +65,7 @@ const CreatePostWidget = ({ picturePath }) => {
                 />
             </FlexBetween>
             <FlexBetween gap="1.5rem" mt="1.5rem">
-                <InputBase 
+                <InputBase
                     placeholder="Description..."
                     onChange={(e) => setDesc(e.target.value)}
                     value={desc}
@@ -146,7 +146,7 @@ const CreatePostWidget = ({ picturePath }) => {
                         Image
                     </Typography>
                 </FlexBetween>
-            
+
 
                 <Button
                     disabled={!title || !desc}
@@ -155,6 +155,18 @@ const CreatePostWidget = ({ picturePath }) => {
                         color: palette.background.alt,
                         backgroundColor: palette.primary.main,
                         borderRadius: "3rem",
+                        "&:disabled": {
+                            color: palette.info.light,
+                            backgroundColor: palette.primary.light,
+
+                        },
+                        "&[disabled]:hover": {
+                            cursor:'not-allowed',
+                        },
+                        "&:hover":{
+                            color:palette.info.dark,
+                            backgroundColor: palette.primary.dark,
+                        }
                     }}
                 >
                     POST

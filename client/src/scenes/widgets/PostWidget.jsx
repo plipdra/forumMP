@@ -63,9 +63,19 @@ const PostWidget = ({
     };
 
     return (
-        <WidgetWrapper m="2rem 0">
+        <WidgetWrapper
+        m="2rem 0"
+        display='flex'
+        flexDirection='column'
+        width="100%"
+        >
             <Box>
-                <FlexBetween>
+                <Box
+                    display = "flex"
+                    justifyContent = "flex-start"
+                    alignItems = "center"
+                    gap="30px"
+                >
                     <UserImage image={userPicturePath} />
                     <Typography
                         color={main}
@@ -79,9 +89,9 @@ const PostWidget = ({
                         }}
                     >
                         {username}
-                    </Typography> 
-                </FlexBetween>
-                               
+                    </Typography>
+                </Box>
+
             </Box>
             <Typography
                 color={main}
@@ -101,15 +111,21 @@ const PostWidget = ({
             >
                 {description}
             </Typography>
+            <Box
+                            justifySelf="center"
+                            alignSelf="center"
+            >
+
             {picturePath && (
-                <img 
-                    width="100%"
-                    height="auto"
-                    alt="picture"
-                    style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-                    src={`http://localhost:3001/assets/${picturePath}`}
+                <img
+                width="500vh"
+                height="auto"
+                alt="picture"
+                style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+                src={`http://localhost:3001/assets/${picturePath}`}
                 />
-            )}
+                )}
+            </Box>
             <FlexBetween mt="0.25rem">
                 <FlexBetween gap="1rem">
                     <FlexBetween gap="0.3rem"> {/* upvote */}
@@ -141,7 +157,7 @@ const PostWidget = ({
                         </IconButton>
                         <Typography>{comments.length}</Typography>
                     </FlexBetween>
-                </FlexBetween>  
+                </FlexBetween>
             </FlexBetween>
         </WidgetWrapper>
     )
