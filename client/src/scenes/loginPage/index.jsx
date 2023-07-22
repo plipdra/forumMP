@@ -9,13 +9,15 @@ const LoginPage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
     return <Box>
-        <Box 
-            width="100%" 
-            backgroundColor={theme.palette.background.alt} 
-            p="1rem 6%" 
+        <Box
+            width="100%"
+            backgroundColor={theme.palette.background.alt}
+            p="1rem 6%"
             textAlign="center"
             >
             <Typography
+                    width="10%"
+                    margin="0px auto"
                     fontWeight="bold"
                     fontSize="32px"
                     color="primary"
