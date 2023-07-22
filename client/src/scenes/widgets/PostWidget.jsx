@@ -1,8 +1,8 @@
 import {
-    ThumbUpOutlined,
-    ThumbUpFilled,
-    ThumbDownOutlined,
-    ThumbDownFilled,
+    ThumbUpOffAlt,
+    ThumbUp,
+    ThumbDownOffAlt,
+    ThumbDown,
     ChatOutlined,
 } from "@mui/icons-material";
 import { Card, Divider, IconButton, Typography, useTheme } from "@mui/material";
@@ -25,7 +25,6 @@ const PostWidget = ({
     downvotes,
     comments,
 }) => {
-    const { isComments, setIsComments } = useState(false);
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((state) => state.user._id);
@@ -39,6 +38,19 @@ const PostWidget = ({
 
     const patchUpvote = async () => {
         const response = await fetch(`http//localhost:3001/posts/${postId}/upvote`, {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId: loggedInUserId }),
+        });
+        const updatedPost = await response.json();
+        dispatch(setPost({ post: updatedPost }));
+    };
+
+    const patchDownvote = async () => {
+        const response = await fetch(`http//localhost:3001/posts/${postId}/downvote`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -95,6 +107,39 @@ const PostWidget = ({
                     src={`http://localhost:3001/assets/${picturePath}`}
                 />
             )}
+            <FlexBetween mt="0.25rem">
+                <FlexBetween gap="1rem">
+                    <FlexBetween gap="0.3rem"> {/* upvote */}
+                        <IconButton onClick={patchUpvote}>
+                            { isUpvoted ? (
+                                <ThumbUp sx={{ color: primary }} />
+                            ) : (
+                                <ThumbUpOffAlt />
+                            )}
+                        </IconButton>
+                    </FlexBetween>
+
+                    <FlexBetween gap="0.3rem">
+                        <Typography>{votes}</Typography>
+                    </FlexBetween>
+                    <FlexBetween gap="0.3rem"> {/* downvote */}
+                        <IconButton onClick={patchDownvote}>
+                            { isDownvoted ? (
+                                <ThumbDown sx={{ color: primary }} />
+                            ) : (
+                                <ThumbDownOffAlt />
+                            )}
+                        </IconButton>
+                    </FlexBetween>
+
+                    <FlexBetween gap="0.3rem">
+                        <IconButton>
+                            <ChatOutlined />
+                        </IconButton>
+                        <Typography>{comments.length}</Typography>
+                    </FlexBetween>
+                </FlexBetween>  
+            </FlexBetween>
         </WidgetWrapper>
     )
 }
