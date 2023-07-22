@@ -17,10 +17,12 @@ export const authSlice = createSlice({
         setLogin: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
+            console.log(state.user);
         },
         setLogout: (state) => {
             state.user = null;
             state.token = null;
+            console.log(state.user);
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;

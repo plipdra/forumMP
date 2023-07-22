@@ -21,7 +21,6 @@ const registerSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
     picture: yup.string().required("required"),
-    pronouns: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
@@ -34,7 +33,6 @@ const initialValuesRegister = {
     email: "",
     password: "",
     picture: "./assets/defaultUser.png",
-    pronouns: "",
 }
 
 const initialValuesLogin = {
@@ -50,7 +48,7 @@ const Form = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
-    console.log(isLogin);
+    console.log(isLogin, "isLogin");
 
     const register = async (values, onSubmitProps) => {
         console.log("registering...");

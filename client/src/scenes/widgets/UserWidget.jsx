@@ -24,7 +24,7 @@ const UserWidget = ({ userId, picturePath }) => {
         const response = await fetch(`http://localhost:3001/users/${userId}`,
         {
             method: "GET",
-            headers: { Authorization: `Bearer $${token}`},
+            headers: { Authorization: `Bearer ${token}`},
         });
         const data = await response.json();
         setUser(data);
@@ -49,7 +49,6 @@ const UserWidget = ({ userId, picturePath }) => {
             <FlexBetween
                 gap="0.5rem"
                 pb="1.1rem"
-                onClick={() => navigate(`/profile/${userId}`)}
             >
                 <FlexBetween gap="1rem">
                     <UserImage image={picturePath} />
@@ -64,24 +63,34 @@ const UserWidget = ({ userId, picturePath }) => {
                                     cursor: "pointer"
                                 }
                             }}
+                            onClick={() => navigate(`/profile/${userId}`)}
                         >
                             {username}
                         </Typography>
                         <Typography>Description</Typography>
                     </Box>
-                    <ManageAccountsOutlined />
+
                 </FlexBetween>
 
-                <Divider />
-
-                {/* Second Row */}
-                <Box p="1rem 0">
-                    <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                        <Typography>Tags</Typography>
-                    </Box>
-                </Box>
-
+                <ManageAccountsOutlined onClick={() => navigate(`/profile/${userId}`)}
+                    sx={{
+                        "&:hover": {
+                            color: palette.primary.light,
+                            cursor: "pointer"
+                        }
+                    }}
+                />
             </FlexBetween>
+
+            <Divider />
+
+            {/* Second Row */}
+            <Box p="1rem 0">
+                <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+                    <Typography>Tags</Typography>
+                </Box>
+            </Box>
+
         </WidgetWrapper>
     )
 }
