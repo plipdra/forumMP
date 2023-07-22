@@ -4,7 +4,7 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import UserWidget from "scenes/widgets/UserWidget";
 import FilterWidget from "scenes/widgets/FilterWidget"
 import { useSelector } from "react-redux";
-import { getUserPosts } from "../../../../server/controllers/posts"
+import PostsWidget from "scenes/widgets/PostsWidget";
 
 const ProfilePage = () => {
     const [pageType, setPageType] = useState("posts");
@@ -14,7 +14,6 @@ const ProfilePage = () => {
     const showComms = pageType === "comments";
 
     //get posts and comments from the server
-    const userPosts = getUserPosts(user,/** */);
     const userComments = [];
 
     return (
@@ -42,7 +41,7 @@ const ProfilePage = () => {
                 width="70%"
                 margin="30px auto"
             >
-
+                <PostsWidget></PostsWidget>
             </Box>
         </Box>
     </Box>
