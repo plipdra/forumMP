@@ -1,11 +1,12 @@
 import Navbar from "scenes/navbar";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, Divider } from "@mui/material";
 import { useSelector } from "react-redux";
 import UserWidget from "scenes/widgets/UserWidget";
 import CreateCommentWidget from "scenes/widgets/CreateCommentWidget";
 import FullPostWidget from "scenes/widgets/FullPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import { useParams } from "react-router-dom";
+import CommentsWidget from "scenes/widgets/CommentsWidget";
 
 const PostPage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -33,6 +34,8 @@ const PostPage = () => {
                     <FullPostWidget postId={postId} />
                     <Typography variant="h2" mb="2rem">Comments</Typography>
                     <CreateCommentWidget postId={postId} picturePath={user.picturePath} />
+                    <Divider />
+                    <CommentsWidget postId={postId} userId={user._id} />
                     {/* <FullPostWidget userId={user._id} /> */}
                     {/* <h2>Post ID: {postId}</h2> */}
                     {/* <PostsWidget /> */}

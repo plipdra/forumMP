@@ -9,7 +9,12 @@ export const createComment = async (req, res) => {
     console.log("Inside createComment");
     try {
         const { postId, userId, commentText } = req.body;
+        // const postId = "64bdaa0cd20042f3ecb91cd5";
+        // const userId = "64bb49f55f83c34f73d4eb40";
+        // const commentText = "asd";
+        console.log("got req.body", postId, userId, commentText);
         const user = await User.findById(userId);
+        console.log("got user ", user);
         const newComment = new Comment({
             postId,
             userId,
@@ -17,26 +22,18 @@ export const createComment = async (req, res) => {
             commentText,
             userPicturePath: user.picturePath,
         })
-        await newComment.save((err, savedComment) => {
-            if (err) {
-                console.error('Error saving comment: ', err);
-            } else {
-                Post.findByIdAndUpdate(
-                    postId,
-                    { $push: { comments: savedComment._id }},
-                    { new: true },
-                    (err, updatedPost) => {
-                        if (err) {
-                            console.error("error updating post with comment: ", err);
-                        } else {
-                            console.log("Comment added to the post: ", updatedPost);
-                        }
-                    }
-                )
-            }
-        });
+        console.log("got Comment: ", newComment);
+        await newComment.save();
+        console.log("adsf")
+        Post.findByIdAndUpdate(
+            postId,
+            { $push: { comments: newComment._id }},
+            { new: true },
+        )
+        console.log(Post.findById(postId))
 
         const comment = await Comment.find();
+        console.log(comment)
         res.status(201).json(comment);
     } catch (err) {
         res.status(409).json({ message: err.message })

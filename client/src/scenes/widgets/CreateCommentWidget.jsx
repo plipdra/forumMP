@@ -25,9 +25,15 @@ const CreateCommentWidget = ({ postId, picturePath }) => {
 
     const handleComment = async () => {
         console.log("went in handleComment")
+        const commentData = {
+            commentText: text,
+            userId: _id,
+            postId: postId,
+        };
+
         const formData = new FormData();
         formData.append("userId", _id);
-        console.log("appended userId: ", _id);
+        console.log("appended userId: ", formData.get("userId"));
         formData.append("postId", postId);
         console.log("appended postId: ", postId);
         formData.append("commentText", text);

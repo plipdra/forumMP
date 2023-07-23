@@ -4,7 +4,7 @@ import { setPosts, setComments } from "state";
 import PostWidget from "./PostWidget";
 import CommentWidget from "./CommentWidget";
 
-const CommentsWidget = ({ userId, isProfile = false }) => {
+const CommentsWidget = ({ postId, userId, isProfile = false }) => {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments);
     const token = useSelector((state) => state.token);
@@ -61,7 +61,7 @@ const CommentsWidget = ({ userId, isProfile = false }) => {
             }        
         }
     } else {
-        if (posts) {
+        if (comments) {
             isThereComment = true;
         } else {
             isThereComment = false;

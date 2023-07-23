@@ -61,7 +61,7 @@ const CommentWidget = ({
         return null;
     }
 
-    if (loggedInUserId === postUserId) {
+    if (loggedInUserId === commentUserId) {
         isUserPoster = true;
     }
 
@@ -91,7 +91,7 @@ const CommentWidget = ({
                                     cursor: "pointer",
                                 },
                             }}
-                            onClick={() => navigate(`/profile/${postUserId}`)}
+                            onClick={() => navigate(`/profile/${commentUserId}`)}
                         >
                             {username}
                         </Typography>
@@ -120,7 +120,7 @@ const CommentWidget = ({
             <FlexBetween mt="0.25rem">
                 <FlexBetween gap="1rem">
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={fullPage}>
+                        <IconButton>
                             <ChatOutlined />
                         </IconButton>
                         <Typography>{comments.length}</Typography>
