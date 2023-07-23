@@ -1,5 +1,36 @@
 import mongoose from "mongoose";
 
+const ReplySchema = new mongoose.Schema(
+    {
+        userId: {
+            type: String,
+            required: true,
+        },
+        postId: {
+            type: String,
+            required: true,
+        },
+        commentId: {
+            type: String,
+            required: true,
+        },
+        text: {
+            type: String,
+            required: true,
+        },
+        userPicturePath: String,
+        comments: {
+            type: [Comment],
+            default: []
+        },
+        parentCommentId: {
+            type: String,
+            required: true,
+        }
+    },
+    { timestamps: true }
+)
+
 
 const CommentSchema = new mongoose.Schema(
     {
@@ -21,13 +52,8 @@ const CommentSchema = new mongoose.Schema(
         },
         userPicturePath: String,
         comments: {
-            type: Array,
-            default: []
+            type: [ReplySchema],
         },
-        parentCommentId: {
-            type: String,
-            required: true,
-        }
     },
     { timestamps: true }
 );
