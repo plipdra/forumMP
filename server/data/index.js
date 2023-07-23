@@ -95,11 +95,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[4], true],
     ]),
-    comments: [
-      "wow so bomb",
-      "very boomy",
-      "I like the byoom",
-    ],
+
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -116,9 +112,6 @@ export const posts = [
     downvotes: new Map([
       [userIds[3], true],
     ]),
-    comments: [
-      "I agree",
-      "I do not",
-    ],
+
   },
 ];

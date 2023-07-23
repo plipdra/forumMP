@@ -32,6 +32,11 @@ const PostWidget = ({
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
     const navigate = useNavigate();
+    try {
+        const user = useSelector((state) => state.user);
+    } catch (err) {
+        console.log(err);
+    }
     const loggedInUserId = useSelector((state) => state.user._id);
     let isUserPoster = false;
     const [ shouldRerender, setShouldRerender ] = useState(false);
