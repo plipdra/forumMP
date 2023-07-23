@@ -108,9 +108,7 @@ const PostWidget = ({
         flexDirection='column'
         width="100%"
         >
-            <Box
-                key={postId} onClick={() => fullPage(postId)}
-            >
+            
                 <Box>
                     <Box
                         display = "flex"
@@ -134,8 +132,11 @@ const PostWidget = ({
                             {username}
                         </Typography>
                     </Box>
-
+            
                 </Box>
+            <Box
+                key={postId} onClick={() => fullPage(postId)}
+            >    
                 <Typography
                     color={main}
                     variant="h2"

@@ -9,4 +9,6 @@ const router = express.Router();
 /* READ */
 router.get("/:id", verifyToken, getUser);
 
+router.delete("/:userId/delete", verifyToken, deleteUser); // not yet implemented
+
 export default router;
