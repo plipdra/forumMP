@@ -37,17 +37,26 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         }
     }, []);
 
-    for (let post of posts) {
-        if (post.userId === userId) {
-            // then may post
+    if (isProfile) {
+        for (let post of posts) {
+            if (post.userId === userId) {
+                // then may post
+                isTherePost = true;
+                break;
+                
+            } else {
+                // then wala
+                isTherePost = false;
+            }        
+        }
+    } else {
+        if (posts) {
             isTherePost = true;
-            break;
-            
         } else {
-            // then wala
             isTherePost = false;
-        }        
+        }
     }
+
 
     if (!isTherePost){
         console.log("hey?");
@@ -74,7 +83,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
                     <PostWidget
                         key={_id}
                         postId={_id}
-                        userId={userId}
+                        postUserId={userId}
                         username={`${username}`}
                         title={title}
                         description={description}

@@ -12,6 +12,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
+import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({
     postId,
@@ -27,6 +28,7 @@ const PostWidget = ({
 }) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
+    const navigate = useNavigate();
     const loggedInUserId = useSelector((state) => state.user._id);
     const isUpvoted = Boolean(upvotes[loggedInUserId]);
     const isDownvoted = Boolean(downvotes[loggedInUserId]);
@@ -37,7 +39,8 @@ const PostWidget = ({
     const primary = palette.primary.main;
 
     const patchUpvote = async () => {
-        const response = await fetch(`http//localhost:3001/posts/${postId}/upvote`, {
+        console.log("went in here");
+        const response = await fetch(`http://localhost:3001/posts/${postId}/upvote`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -45,12 +48,13 @@ const PostWidget = ({
             },
             body: JSON.stringify({ userId: loggedInUserId }),
         });
+        console.log("passed through")
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
     };
 
     const patchDownvote = async () => {
-        const response = await fetch(`http//localhost:3001/posts/${postId}/downvote`, {
+        const response = await fetch(`http://localhost:3001/posts/${postId}/downvote`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -87,6 +91,7 @@ const PostWidget = ({
                                 cursor: "pointer",
                             },
                         }}
+                        onClick={() => navigate(`/profile/${postUserId}`)}
                     >
                         {username}
                     </Typography>

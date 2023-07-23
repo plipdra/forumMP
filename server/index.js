@@ -16,7 +16,7 @@ import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
-import { posts } from "./data/index.js";
+import { users, posts } from "./data/index.js";
 
 /* CONFIGURATIONS */ // github repo of respective modules
 const __filename = fileURLToPath(import.meta.url);

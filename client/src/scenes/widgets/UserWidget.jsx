@@ -68,7 +68,7 @@ const UserWidget = ({ userId, picturePath }) => {
                         >
                             {username}
                         </Typography>
-                        <Typography>Description</Typography>
+                        <Typography>{user.about}</Typography>
                     </Box>
 
                 </FlexBetween>
