@@ -73,7 +73,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
                 </FlexBetween>
 
-                <ManageAccountsOutlined onClick={() => navigate(`/profile/${userId}`)}
+                <ManageAccountsOutlined onClick={() => navigate(`/profile/${userId}/settings`)}
                     sx={{
                         "&:hover": {
                             color: palette.primary.light,

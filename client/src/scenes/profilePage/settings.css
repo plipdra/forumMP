@@ -1,0 +1,85 @@
+:root{
+  font-family: Rubik,sans-serif
+}
+li{
+  list-style-type: none;
+}
+li:hover{
+  cursor: pointer;
+}
+ul{
+  padding: 0;
+  height: 100%;
+}
+h3{
+  color:darkgray;
+}
+hr{
+  width:auto
+}
+.save,.cancel{
+  margin: 0px 15px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 89, 190, 0.672);
+  color: rgba(255, 255, 255, 0.852);
+  width:fit-content;
+  justify-self: flex-end;
+}
+.cancel{
+  background-color: rgba(123, 123, 123, 0.672);
+  color: rgba(255, 255, 255, 0.852);
+}
+.save:hover, .cancel:hover{
+  cursor: pointer;
+}
+#user-settings{
+  display: flex;
+  margin: 30px auto;
+  width: 80%;
+  height: 600px;
+  border-radius: 30px;
+  padding: 30px;
+}
+#setting-nav{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  border-right: 2px solid;
+}
+
+#delete-account{
+  width: fit-content;
+  border-radius: 30px;
+  padding:15px;
+  background-color: rgba(254, 108, 108, 0.333);
+  color: rgb(228, 34, 0);
+}
+#delete-account:hover{
+  cursor: pointer;
+}
+#setting{
+  padding: 0px 30px;
+  width: 70%;
+}
+#profile, #account{
+  height: 90%;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+}
+#username{
+  border-radius: 4px;
+  width:40%;
+  height: 6%;
+}
+#user-desc{
+  margin: 10px;
+  width: 80%;
+  height: 40%;
+}
+
