@@ -30,6 +30,19 @@ export const createPost = async (req, res) => {
 }
 
 /* READ */
+export const getPost = async (req, res) => {
+    console.log("GetPost");
+    try {
+        const { postId } = req.params;
+        const post = await Post.findById(postId);
+        res.status(200).json(post);
+    } catch (err) {
+        console.log("error in getPost");
+        res.status(404).json({ message: err.message })
+    }
+}
+
+
 export const getFeedPosts = async (req, res) => {
     console.log("getFeedPosts");
     try {
@@ -134,6 +147,18 @@ export const downvotePost = async (req, res) => {
         res.status(200).json(updatedPost);
     } catch (err) {
         console.log("error with downvotePost");
+        res.status(404).json({ message: err.message })
+    }
+}
+
+export const deletePost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        console.log("postId get", postId);
+        const post = await Post.findByIdAndDelete(postId);
+        res.status(200).json({message: "post deleted!"});
+    } catch (err) {
+        console.log("error in deletePost");
         res.status(404).json({ message: err.message })
     }
 }

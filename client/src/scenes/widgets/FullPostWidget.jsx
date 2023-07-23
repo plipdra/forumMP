@@ -3,21 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
 
-const PostsWidget = ({ userId, isProfile = false }) => {
+const FullPostWidget = ({ userId, isProfile = false }) => {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
     let isTherePost = false;
-
-    // const getPost = async () => {
-    //     const response = await fetch(`http://localhost:3001/posts/${postId}`, {
-    //         method: "GET",
-    //         headers: { Authorization: `Bearer ${token}`},
-    //     });
-    //     const data = await response.json();
-    //     dispatch(setPosts({ posts: data }));
-    //     console.log("GetPost for full Page");
-    // }
 
     const getPosts = async () => {
         const response = await fetch(`http://localhost:3001/posts`, {
@@ -26,7 +16,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
-        console.log(posts, "getPosts");
+        console.log(posts, "here");
     };
 
     const getUserPosts = async () => {
@@ -36,7 +26,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
-        console.log(posts, "getUserPosts");
+        console.log(posts, "there");
     };
 
     useEffect(() => {
@@ -46,36 +36,6 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             getPosts();
         }
     }, []);
-
-    if (isProfile) {
-        for (let post of posts) {
-            if (post.userId === userId) {
-                // then may post
-                isTherePost = true;
-                break;
-                
-            } else {
-                // then wala
-                isTherePost = false;
-            }        
-        }
-    } else {
-        if (posts) {
-            isTherePost = true;
-        } else {
-            isTherePost = false;
-        }
-    }
-
-
-    if (!isTherePost){
-        console.log("hey?");
-        return (<h1>ala boii?</h1>);
-    } else {
-        console.log("helo");
-    }
-
-    // return (console.log(posts))
 
     return (
         <>
@@ -111,4 +71,4 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     )
 }
 
-export default PostsWidget;
+export default FullPostWidget;

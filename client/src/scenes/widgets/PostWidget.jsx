@@ -4,14 +4,16 @@ import {
     ThumbDownOffAlt,
     ThumbDown,
     ChatOutlined,
+    DeleteOutline,
+    EditOutlined,
 } from "@mui/icons-material";
 import { Card, Divider, IconButton, Typography, useTheme, Box } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
+import { setPost, setPosts } from "state";
 import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({
@@ -27,9 +29,13 @@ const PostWidget = ({
     comments,
 }) => {
     const dispatch = useDispatch();
+    const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
     const navigate = useNavigate();
     const loggedInUserId = useSelector((state) => state.user._id);
+    let isUserPoster = false;
+    const [ shouldRerender, setShouldRerender ] = useState(false);
+
     const isUpvoted = Boolean(upvotes[loggedInUserId]);
     const isDownvoted = Boolean(downvotes[loggedInUserId]);
     const votes = Object.keys(upvotes).length - Object.keys(downvotes).length;
@@ -65,6 +71,35 @@ const PostWidget = ({
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
     };
+
+    const fullPage = async () => {
+        navigate(`/posts/${postId}`);
+    }
+
+    const editPost = async () => {
+        
+    }
+
+    const deletePost = async () => {
+        const response = await fetch(`http://localhost:3001/posts/${postId}/delete`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        const message = await response.json();
+        setShouldRerender(true);
+    };
+
+    if (shouldRerender) {
+        console.log("rerender")
+        return null;
+    }
+
+    if (loggedInUserId === postUserId) {
+        isUserPoster = true;
+    }
 
     return (
         <WidgetWrapper
@@ -157,11 +192,25 @@ const PostWidget = ({
                     </FlexBetween>
 
                     <FlexBetween gap="0.3rem">
-                        <IconButton>
+                        <IconButton onClick={fullPage}>
                             <ChatOutlined />
                         </IconButton>
                         <Typography>{comments.length}</Typography>
                     </FlexBetween>
+                    {isUserPoster && (
+                        <FlexBetween>
+                            <IconButton onClick={editPost}>
+                                <EditOutlined />
+                            </IconButton>
+                        </FlexBetween>
+                    )}
+                    {isUserPoster && (
+                        <FlexBetween>
+                            <IconButton onClick={deletePost}>
+                                <DeleteOutline />
+                            </IconButton>
+                        </FlexBetween>
+                    )}
                 </FlexBetween>
             </FlexBetween>
         </WidgetWrapper>
