@@ -85,7 +85,7 @@ export const posts = [
     username: "ernesto",
     title: "FIREWORKS!!!",
     description: "They go kaboom!",
-    picturePath: "post4.jpeg",
+    picturePath: "axolotol.png",
     userPicturePath: "",
     upvotes: new Map([
       [userIds[1], true],

@@ -15,10 +15,14 @@ const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
+    const loggedInUser = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
+    let isUser = false;
+
+    console.log("user: ", user, "loggedInUser: ", loggedInUser)
 
     const getUser = async () => {
         const response = await fetch(`http://localhost:3001/users/${userId}`,
@@ -36,6 +40,12 @@ const UserWidget = ({ userId, picturePath }) => {
 
     if (!user) {
         return null;
+    }
+
+    if (loggedInUser._id === user._id) {
+        isUser = true;
+    } else {
+        isUser = false;
     }
 
     const {
@@ -73,14 +83,18 @@ const UserWidget = ({ userId, picturePath }) => {
 
                 </FlexBetween>
 
-                <ManageAccountsOutlined onClick={() => navigate(`/profile/${userId}/settings`)}
-                    sx={{
-                        "&:hover": {
-                            color: palette.primary.light,
-                            cursor: "pointer"
-                        }
-                    }}
-                />
+                {isUser && (
+                    <ManageAccountsOutlined onClick={() => navigate(`/profile/${userId}/settings`)}
+                        sx={{
+                            "&:hover": {
+                                color: palette.primary.light,
+                                cursor: "pointer"
+                            }
+                        }}
+                    />
+                )}
+
+                
             </FlexBetween>
 
 

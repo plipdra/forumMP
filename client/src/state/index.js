@@ -5,6 +5,7 @@ const initialState = {
     user: null,
     token: null,
     posts: [],
+    comments: [],
     fullPost: null,
     filter: "posts",
 };
@@ -44,6 +45,20 @@ export const authSlice = createSlice({
             });
             state.posts = updatedPosts;
         },
+        setComments: (state, action) => {
+            state.comments = action.payload.comments;
+            console.log(state.comments);
+        },
+        setComment: (state, action) => {
+            const updatedComments = state.posts.map((comment) => {
+                if (comment._id === action.payload.comment._id) {
+                    console.log("went in");
+                    return action.payload.comment;
+                }
+                return comment;
+            });
+            state.comments = updatedComments;
+        },
         setFilterProfile:(state) => {
             state.filter = state.filter === "posts" ? "comments":"posts";
             console.log(state.filter);
@@ -51,5 +66,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setMode, setLogin, setLogout, setPosts, setFullPost, setPost, setFilterProfile } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
 export default authSlice.reducer;

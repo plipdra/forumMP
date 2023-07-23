@@ -1,47 +1,77 @@
+import Comment from "../models/Comment.js";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 
 // TODO: CONVERT TO COMMENTS, ADD EDIT COMMENT
 
 /* CREATE */
-export const createPost = async (req, res) => {
+export const createComment = async (req, res) => {
+    console.log("Inside createComment");
     try {
-        const { userId, description, picturePath } = req.body;
+        const { postId, userId, commentText } = req.body;
         const user = await User.findById(userId);
-        const newPost = new Post({
+        const newComment = new Comment({
+            postId,
             userId,
-            title,
-            description,
+            username: user.username,
+            commentText,
             userPicturePath: user.picturePath,
-            picturePath,
-            votes: {},
-            comments: []
         })
-        await newPost.save();
+        await newComment.save((err, savedComment) => {
+            if (err) {
+                console.error('Error saving comment: ', err);
+            } else {
+                Post.findByIdAndUpdate(
+                    postId,
+                    { $push: { comments: savedComment._id }},
+                    { new: true },
+                    (err, updatedPost) => {
+                        if (err) {
+                            console.error("error updating post with comment: ", err);
+                        } else {
+                            console.log("Comment added to the post: ", updatedPost);
+                        }
+                    }
+                )
+            }
+        });
 
-        const post = await Post.find();
-        res.status(201).json(post);
+        const comment = await Comment.find();
+        res.status(201).json(comment);
     } catch (err) {
         res.status(409).json({ message: err.message })
     }
 }
 
 /* READ */
-export const getFeedPosts = async (req, res) => {
+export const getComments = async (req, res) => {
     try {
-        const post = await Post.find();
-        res.status(200).json(post);
+        const { postId } = req.params;
+        const comment = await Comment.findById({ postId });
+        res.status(200).json(comment);
     } catch (err) {
         res.status(404).json({ message: err.message })
     }
 }
 
-export const getUserPosts = async (req, res) => {
+export const getUserComments = async (req, res) => {
     try {
         const { userId } = req.params;
-        const post = await Post.find({ userId });
-        res.status(200).json(post);
+        const comment = await Comment.find({ userId });
+        res.status(200).json(comment);
     } catch (err) {
+        res.status(404).json({ message: err.message })
+    }
+}
+
+export const deleteComment = async (req, res) => {
+    try {
+        const { commentId } = req.params;
+        console.log("commentId get", commentId);
+        const comment = await Comment.findByIdAndDelete(commentId);
+        res.status(200).json({message: "comment deleted!"});
+    } catch (err) {
+        console.log("error in deleteComment");
         res.status(404).json({ message: err.message })
     }
 }
