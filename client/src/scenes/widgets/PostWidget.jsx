@@ -72,7 +72,7 @@ const PostWidget = ({
         dispatch(setPost({ post: updatedPost }));
     };
 
-    const fullPage = async () => {
+    const fullPage = (postId) => {
         navigate(`/posts/${postId}`);
     }
 
@@ -108,49 +108,54 @@ const PostWidget = ({
         flexDirection='column'
         width="100%"
         >
-            <Box>
-                <Box
-                    display = "flex"
-                    justifyContent = "flex-start"
-                    alignItems = "center"
-                    gap="30px"
-                >
-                    <UserImage image={userPicturePath} />
-                    <Typography
-                        color={main}
-                        variant="h5"
-                        fontWeight="500"
-                        sx={{
-                            "&:hover": {
-                                color: palette.primary.light,
-                                cursor: "pointer",
-                            },
-                        }}
-                        onClick={() => navigate(`/profile/${postUserId}`)}
+            <Box
+                key={postId} onClick={() => fullPage(postId)}
+            >
+                <Box>
+                    <Box
+                        display = "flex"
+                        justifyContent = "flex-start"
+                        alignItems = "center"
+                        gap="30px"
                     >
-                        {username}
-                    </Typography>
-                </Box>
+                        <UserImage image={userPicturePath} />
+                        <Typography
+                            color={main}
+                            variant="h5"
+                            fontWeight="500"
+                            sx={{
+                                "&:hover": {
+                                    color: palette.primary.light,
+                                    cursor: "pointer",
+                                },
+                            }}
+                            onClick={() => navigate(`/profile/${postUserId}`)}
+                        >
+                            {username}
+                        </Typography>
+                    </Box>
 
+                </Box>
+                <Typography
+                    color={main}
+                    variant="h2"
+                    sx={{
+                        mt: "1rem"
+                    }}
+                >
+                    {title}
+                </Typography>
+                <Typography
+                    color={main}
+                    variant="h4"
+                    sx={{
+                        mt: "1rem"
+                    }}
+                >
+                    {description}
+                </Typography>                
             </Box>
-            <Typography
-                color={main}
-                variant="h2"
-                sx={{
-                    mt: "1rem"
-                }}
-            >
-                {title}
-            </Typography>
-            <Typography
-                color={main}
-                variant="h3"
-                sx={{
-                    mt: "1rem"
-                }}
-            >
-                {description}
-            </Typography>
+
             <Box
                             justifySelf="center"
                             alignSelf="center"

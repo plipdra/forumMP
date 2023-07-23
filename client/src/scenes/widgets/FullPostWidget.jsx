@@ -1,45 +1,35 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "state";
+import { setPosts, setFullPost } from "state";
 import PostWidget from "./PostWidget";
 
-const FullPostWidget = ({ userId, isProfile = false }) => {
+const FullPostWidget = ({ postId }) => {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
+    const fullPost = useSelector((state) => state.fullPost);
     const token = useSelector((state) => state.token);
+    var post = null;
     let isTherePost = false;
 
-    const getPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts`, {
+    const getPost = async () => {
+        const response = await fetch(`http://localhost:3001/posts/${postId}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
         const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-        console.log(posts, "here");
-    };
-
-    const getUserPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-        console.log(posts, "there");
+        console.log("data ",data._id)
+        dispatch(setFullPost({ fullPost: data }));
     };
 
     useEffect(() => {
-        if (isProfile) {
-            getUserPosts();
-        } else {
-            getPosts();
-        }
+        getPost();
     }, []);
+
+    // return (console.log("here", fullPost))
 
     return (
         <>
-            {posts.map(
+            {[fullPost].map(
                 ({
                     _id,
                     userId,
@@ -56,7 +46,7 @@ const FullPostWidget = ({ userId, isProfile = false }) => {
                         key={_id}
                         postId={_id}
                         postUserId={userId}
-                        username={`${username}`}
+                        username={username}
                         title={title}
                         description={description}
                         picturePath={picturePath}

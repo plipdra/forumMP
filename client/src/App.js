@@ -23,6 +23,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/profile/:userId" element={<ProfilePage />} />
             <Route path="/posts/:postId" element={<PostPage />} />
+            {/* <Route path="/posts/:id" render={(props) => (<PostPage id={props.match.params.id}/>)} /> */}
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

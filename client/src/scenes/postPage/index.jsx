@@ -4,10 +4,13 @@ import { useSelector } from "react-redux";
 import UserWidget from "scenes/widgets/UserWidget";
 import CreatePostWidget from "scenes/widgets/CreatePostWidget";
 import FullPostWidget from "scenes/widgets/FullPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import { useParams } from "react-router-dom";
 
 const PostPage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const user = useSelector((state) => state.user);
+    const { postId } = useParams();
 
     return (
     <Box>
@@ -27,9 +30,11 @@ const PostPage = () => {
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
-                    {/* <FullPostWidget postId={"64bca2d7bb30c05682b87606"} /> */}
+                    <FullPostWidget postId={postId} />
                     {/* <FullPostWidget userId={user._id} /> */}
-                    hi
+                    {/* <h2>Post ID: {postId}</h2> */}
+                    {/* <PostsWidget /> */}
+                    {/* hi */}
                     
                     
                 </Box>
