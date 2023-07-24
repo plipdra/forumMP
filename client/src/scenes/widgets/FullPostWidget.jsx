@@ -5,7 +5,6 @@ import PostWidget from "./PostWidget";
 
 const FullPostWidget = ({ postId }) => {
     const dispatch = useDispatch();
-    const posts = useSelector((state) => state.posts);
     const fullPost = useSelector((state) => state.fullPost);
     const token = useSelector((state) => state.token);
     var post = null;
@@ -14,10 +13,9 @@ const FullPostWidget = ({ postId }) => {
     const getPost = async () => {
         const response = await fetch(`http://localhost:3001/posts/${postId}`, {
             method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
+            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
         const data = await response.json();
-        console.log("data ",data._id)
         dispatch(setFullPost({ fullPost: data }));
     };
 

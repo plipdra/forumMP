@@ -1,5 +1,5 @@
 import express from "express";
-import { getComments, getUserComments, deleteComment, createComment } from "../controllers/comments.js";
+import { getComments, getUserComments, deleteComment, createComment, deleteComments } from "../controllers/comments.js";
 import { verifyToken } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -14,5 +14,6 @@ router.get("/:userId/user/comments", verifyToken, getUserComments);
 
 
 router.delete("/:commentId/delete", verifyToken, deleteComment);
+router.delete("/:postId/comments/delete", verifyToken, deleteComments);
 
 export default router;

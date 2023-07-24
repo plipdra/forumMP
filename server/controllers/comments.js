@@ -64,3 +64,23 @@ export const deleteComment = async (req, res) => {
         res.status(404).json({ message: err.message })
     }
 }
+
+export const deleteComments = async (req, res) => {
+    console.log("deleteComments");
+    try {
+        const { postId } = req.params;
+        console.log("commentId get", postId);
+        const comment = await Comment.deleteMany({postId: postId});
+
+        console.log("commentss", comment)
+
+        // const updatedComment = await Comment.deleteMany(comment);
+
+        console.log("commentzz", comment)
+
+        res.status(200).json({message: "comments deleted!"});
+    } catch (err) {
+        console.log("error in deleteComment");
+        res.status(404).json({ message: err.message })
+    }
+}

@@ -13,7 +13,7 @@ import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost, setPosts } from "state";
+import { setPost, setComments } from "state";
 import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({
@@ -26,10 +26,9 @@ const PostWidget = ({
     userPicturePath,
     upvotes,
     downvotes,
-    comments,
 }) => {
     const dispatch = useDispatch();
-    const posts = useSelector((state) => state.posts);
+    const comments = useSelector((state) => state.comments);
     const token = useSelector((state) => state.token);
     const navigate = useNavigate();
     const loggedInUserId = useSelector((state) => state.user._id);
@@ -85,6 +84,20 @@ const PostWidget = ({
     }
 
     const deletePost = async () => {
+        const deleteComments = async () => {
+            const response = await fetch(`http://localhost:3001/comments/${postId}/comments/delete`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            const message = await response.json();
+            setShouldRerender(true);
+        };
+
+        deleteComments();
+
         const response = await fetch(`http://localhost:3001/posts/${postId}/delete`, {
             method: "DELETE",
             headers: {
