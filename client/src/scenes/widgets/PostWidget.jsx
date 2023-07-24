@@ -80,8 +80,8 @@ const PostWidget = ({
         navigate(`/posts/${postId}`);
     }
 
-    const editPost = async () => {
-        
+    const editPost = (postId) => {
+        navigate(`/edit/${postId}`);
     }
 
     const deletePost = async () => {
@@ -112,7 +112,7 @@ const PostWidget = ({
         flexDirection='column'
         width="100%"
         >
-            
+
                 <Box>
                     <Box
                         display = "flex"
@@ -136,11 +136,11 @@ const PostWidget = ({
                             {username}
                         </Typography>
                     </Box>
-            
+
                 </Box>
             <Box
                 key={postId} onClick={() => fullPage(postId)}
-            >    
+            >
                 <Typography
                     color={main}
                     variant="h2"
@@ -158,7 +158,7 @@ const PostWidget = ({
                     }}
                 >
                     {description}
-                </Typography>                
+                </Typography>
             </Box>
 
             <Box
@@ -202,13 +202,13 @@ const PostWidget = ({
                     </FlexBetween>
 
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={fullPage}>
+                        <IconButton>
                             <ChatOutlined />
                         </IconButton>
                     </FlexBetween>
                     {isUserPoster && (
                         <FlexBetween>
-                            <IconButton onClick={editPost}>
+                            <IconButton key={postId} onClick={() => editPost(postId)}>
                                 <EditOutlined />
                             </IconButton>
                             <Typography>Edit</Typography>

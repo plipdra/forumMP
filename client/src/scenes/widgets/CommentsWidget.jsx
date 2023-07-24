@@ -62,11 +62,11 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
                 // then may post
                 isThereComment = true;
                 break;
-                
+
             } else {
                 // then wala
                 isThereComment = false;
-            }        
+            }
         }
     } else {
         if (comments) {

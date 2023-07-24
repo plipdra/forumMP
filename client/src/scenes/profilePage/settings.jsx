@@ -103,18 +103,19 @@ const UserSettings = () => {
                     padding: "1rem 2rem",
                   }}
                 ></InputBase><br/>
-                <Button 
+                <Button
                 onClick={editUser}
                 disabled={!username && !about} >Confirm Changes</Button>
               </form>
-            </Box>            
+            </Box>
           ) : (
             <Box id="account">
               <h3>Account Settings</h3>
               <form>
                 <label htmlFor="email"><b>Email Address:</b></label>&nbsp;&nbsp;
+
               </form>
-            </Box>            
+            </Box>
           )}
 
           {/* hide when not selected ang change email and pass */}
