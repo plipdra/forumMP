@@ -50,7 +50,6 @@ const UserWidget = ({ userId, picturePath }) => {
 
     const {
         username,
-        email,
     } = user;
 
     return (
