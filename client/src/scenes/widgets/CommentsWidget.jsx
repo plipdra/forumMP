@@ -3,22 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts, setComments } from "state";
 import PostWidget from "./PostWidget";
 import CommentWidget from "./CommentWidget";
+import { Typography } from "@mui/material";
 
-const CommentsWidget = ({ postId, userId, isProfile = false }) => {
+const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, query = null }) => {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments);
     const token = useSelector((state) => state.token);
     let isThereComment = false;
 
-    // const getPost = async () => {
-    //     const response = await fetch(`http://localhost:3001/posts/${postId}`, {
-    //         method: "GET",
-    //         headers: { Authorization: `Bearer ${token}`},
-    //     });
-    //     const data = await response.json();
-    //     dispatch(setPosts({ posts: data }));
-    //     console.log("GetPost for full Page");
-    // }
+    const searchComments = async () => {
+        // const response = await fetch(`http://localhost:3001/search/${query}`, {
+        //     method: "GET",
+        //     headers: { Authorization: `Bearer ${token}`},
+        // });
+        // const data = await response.json();
+        // dispatch(setComments({ comments: data }));
+        dispatch(setComments({ comments: [] }));
+        console.log(comments, "getComments");
+    }
 
     const getComments = async () => {
         const response = await fetch(`http://localhost:3001/comments/${postId}/comments`, {
@@ -43,6 +45,8 @@ const CommentsWidget = ({ postId, userId, isProfile = false }) => {
     useEffect(() => {
         if (isProfile) {
             getUserComments();
+        } else if (isSearch) {
+            searchComments();
         } else {
             console.log("goes in")
             getComments();
@@ -69,12 +73,13 @@ const CommentsWidget = ({ postId, userId, isProfile = false }) => {
         }
     }
 
+    if (isSearch) {
+        isThereComment = false;
+    }
+
 
     if (!isThereComment){
-        console.log("hey?");
-        return (<h1>ala boii?</h1>);
-    } else {
-        console.log("helo");
+        return (<Typography variant={"h3"}>No Results Found.</Typography>);
     }
 
     // return (console.log("return: ", comments))

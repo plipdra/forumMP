@@ -4,6 +4,7 @@ const initialState = {
     mode: "light",
     user: null,
     token: null,
+    users: [],
     posts: [],
     comments: [],
     fullPost: null,
@@ -30,6 +31,19 @@ export const authSlice = createSlice({
         },
         setOrder: (state) => {
             state.order = state.order === "New" ? "Trending" : "New";
+        },
+        setUsers: (state, action) => {
+            state.users = action.payload.users;
+        },
+        setUser: (state, action) => {
+            const updatedUsers = state.users.map((user) => {
+                if (user._id === action.payload.user._id) {
+                    console.log("went in");
+                    return action.payload.user;
+                }
+                return user;
+            });
+            state.users = updatedUsers;
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;
@@ -70,5 +84,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setMode, setLogin, setLogout, setOrder, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setOrder, setUser, setUsers, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
 export default authSlice.reducer;

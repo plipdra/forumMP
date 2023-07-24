@@ -9,6 +9,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "theme";
 import UserSettings from "scenes/profilePage/settings"
+import SearchPage from "scenes/searchPage";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -25,6 +26,7 @@ function App() {
             <Route path="/profile/:userId" element={<ProfilePage />} />
             <Route path="/posts/:postId" element={<PostPage />} />
             <Route path="/profile/:userId/settings" element={<UserSettings />} />
+            <Route path="/search/:value" element={<SearchPage />} />
             {/* <Route path="/posts/:id" render={(props) => (<PostPage id={props.match.params.id}/>)} /> */}
           </Routes>
         </ThemeProvider>

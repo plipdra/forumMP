@@ -92,6 +92,8 @@ export const getUserPosts = async (req, res) => {
 export const getFilteredPosts = async (req, res) => {
     console.log("Server GetFilteredPosts");
     try {
+        // const dummy = Post({title: "FIREWORKS!!!"});
+        // console.log("search test", dummy);
         const { filter } = req.params;
         let post = "";
 

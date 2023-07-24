@@ -2,32 +2,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
+import { Typography } from "@mui/material";
 
-const PostsWidget = ({ userId, isProfile = false }) => {
+const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null }) => {
     const dispatch = useDispatch();
     const filter = useSelector((state) => state.order);
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
     let isTherePost = false;
 
-    // const getPost = async () => {
-    //     const response = await fetch(`http://localhost:3001/posts/${postId}`, {
-    //         method: "GET",
-    //         headers: { Authorization: `Bearer ${token}`},
-    //     });
-    //     const data = await response.json();
-    //     dispatch(setPosts({ posts: data }));
-    //     console.log("GetPost for full Page");
-    // }
-
     const getPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-        console.log(posts, "getPosts");
+        // const response = await fetch(`http://localhost:3001/search/${query}`, {
+        //     method: "GET",
+        //     headers: { Authorization: `Bearer ${token}`},
+        // });
+        // const data = await response.json();
+        // dispatch(setPosts({ posts: data }));
+        dispatch(setPosts({ posts: [] }));
+        console.log(posts, "getPosts (search)");
     };
 
     const getUserPosts = async () => {
@@ -55,7 +47,11 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     useEffect(() => {
         if (isProfile) {
             getUserPosts();
+        } else if (isSearch) {
+            console.log("her", isTherePost)
+            getPosts();
         } else {
+            console.log("adsf")
             if (filter) {
                 getFilteredPosts();
             } else {
@@ -85,9 +81,13 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         }
     }
 
+    if (isSearch) {
+        isTherePost = false;
+    }
+
 
     if (!isTherePost){
-        return (<h1>ala boii?</h1>);
+        return (<Typography variant={"h3"}>No Results Found.</Typography>);
     }
 
     // return (console.log(posts))
