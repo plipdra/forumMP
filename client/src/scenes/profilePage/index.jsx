@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import Navbar from "scenes/navbar";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import UserWidget from "scenes/widgets/UserWidget";
 import FilterWidget from "scenes/widgets/FilterWidget"
 import { useSelector } from "react-redux";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import { useParams } from "react-router-dom";
+import WidgetWrapper from "components/WidgetWrapper";
+import CommentsWidget from "scenes/widgets/CommentsWidget";
 
 const ProfilePage = () => {
     const [pageType, setPageType] = useState("posts");
@@ -14,8 +16,14 @@ const ProfilePage = () => {
     const { userId } = useParams();
     const token = useSelector((state) => state.token); // current token
     // const user = useSelector((state) => state.user); // current user
+    const { palette } = useTheme();
+    const dark = palette.neutral.dark;
+    const medium = palette.neutral.medium;
+    const main = palette.neutral.main;
+    const filterBG = palette.background.alt
     const showPosts = pageType === "posts";
     const showComms = pageType === "comments";
+    console.log(pageType);
 
 
     //get posts and comments from the server
@@ -55,18 +63,67 @@ const ProfilePage = () => {
                 width="70%"
                 margin="30px auto"
             >
-                <FilterWidget
-                    display="flex"
-                    justifyContent="center"
-                />
+                <WidgetWrapper
+                    display= "flex"
+                    justifyContent= "space-around"
+                    alignItems= "center"
+                    padding = "1.5rem 0.75rem"
+                >
+                    <Typography
+                    onClick={() => {
+                        setPageType("posts")
+                    }}
+                    variant="h4"
+                    color={dark}
+                    fontWeight="500"
+                    mb="1rem"
+                    sx={{
+                        "&:hover": {
+                            color: medium,
+                            cursor: "pointer"
+                        }
+                    }}
+                    >
+                    Posts
+                    </Typography>
+                    <Typography
+                    onClick={() => {
+                        setPageType("comments")
+                    }}
+                    variant="h4"
+                    color={dark}
+                    fontWeight="500"
+                    mb="1rem"
+                    sx={{
+                        "&:hover": {
+                            color: medium,
+                            cursor: "pointer"
+                        }
+                    }}
+                    >
+                    Comments
+                    </Typography>
+                </WidgetWrapper>
             </Box>
             {/* contains the posts/comments */}
-            <Box
-                width="70%"
-                margin="30px auto"
-            >
-                <PostsWidget userId={user._id} isProfile />
-            </Box>
+            {showPosts && (
+                <Box
+                    width="70%"
+                    margin="30px auto"
+                >
+                    <PostsWidget userId={user._id} isProfile />
+                </Box>
+            )}
+
+            {showComms && (
+                <Box
+                    width="70%"
+                    margin="30px auto"
+                >
+                    <CommentsWidget userId={user._id} isProfile />
+                </Box>
+            )}
+
         </Box>
     </Box>
     )

@@ -2,7 +2,6 @@ import { Box, Typography, Divider, useTheme, Avatar } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { setFilterProfile } from "state";
 // import { useSelector } from "react-redux";
 
 const FilterWidget = () => {
@@ -15,6 +14,8 @@ const FilterWidget = () => {
   const filterBG = palette.background.alt
   const showPosts = pageType === "posts";
   const showComms = pageType === "comments";
+  console.log(pageType);
+
   return(
     <WidgetWrapper
       display= "flex"
@@ -24,7 +25,7 @@ const FilterWidget = () => {
     >
       <Typography
         onClick={() => {
-          dispatch(setFilterProfile());
+          setPageType("posts")
         }}
         variant="h4"
         color={dark}
@@ -40,6 +41,9 @@ const FilterWidget = () => {
         Posts
       </Typography>
       <Typography
+        onClick={() => {
+          setPageType("comments")
+        }}
         variant="h4"
         color={dark}
         fontWeight="500"

@@ -6,7 +6,7 @@ const router = express.Router();
 
 /* READ */
 router.get("/:postId/comments", verifyToken, getComments);
-router.get("/:userId/comments", verifyToken, getUserComments);
+router.get("/:userId/user/comments", verifyToken, getUserComments);
 
 // router.post("/", verifyToken, createComment);
 

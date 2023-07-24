@@ -42,6 +42,7 @@ export const getComments = async (req, res) => {
 }
 
 export const getUserComments = async (req, res) => {
+    console.log("GetUserComments")
     try {
         const { userId } = req.params;
         const comment = await Comment.find({ userId });

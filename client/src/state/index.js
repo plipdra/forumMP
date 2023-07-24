@@ -9,7 +9,6 @@ const initialState = {
     comments: [],
     fullPost: null,
     order: "New",
-    filter: "posts",
 };
 
 export const authSlice = createSlice({
@@ -77,12 +76,8 @@ export const authSlice = createSlice({
             });
             state.comments = updatedComments;
         },
-        setFilterProfile:(state) => {
-            state.filter = state.filter === "posts" ? "comments":"posts";
-            console.log(state.filter);
-        }
     }
 })
 
-export const { setMode, setLogin, setLogout, setOrder, setUser, setUsers, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setOrder, setUser, setUsers, setPosts, setFullPost, setPost, setComments, setComment } = authSlice.actions;
 export default authSlice.reducer;
