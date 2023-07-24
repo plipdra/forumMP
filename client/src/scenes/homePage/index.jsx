@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import UserWidget from "scenes/widgets/UserWidget";
 import CreatePostWidget from "scenes/widgets/CreatePostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
+import SortWidget from "scenes/widgets/sortWidget";
 
 const HomePage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -28,6 +29,9 @@ const HomePage = () => {
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
                     <CreatePostWidget picturePath={user.picturePath} />
+                    <Box m={"2rem"} />
+                    <SortWidget userId={user._id} picturePath={user.picturePath} />
+                    <Box m={"2rem"} />
                     <PostsWidget userId={user._id} />
                     
                 </Box>

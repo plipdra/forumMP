@@ -28,7 +28,6 @@ const PostWidget = ({
     downvotes,
     comments,
 }) => {
-    console.log("post param: ", postId)
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
@@ -37,8 +36,8 @@ const PostWidget = ({
     let isUserPoster = false;
     const [ shouldRerender, setShouldRerender ] = useState(false);
 
-    const isUpvoted = Boolean(upvotes[loggedInUserId]);
-    const isDownvoted = Boolean(downvotes[loggedInUserId]);
+    let isUpvoted = Boolean(upvotes[loggedInUserId]);
+    let isDownvoted = Boolean(downvotes[loggedInUserId]);
     const votes = Object.keys(upvotes).length - Object.keys(downvotes).length;
 
     const { palette } = useTheme();
@@ -46,7 +45,6 @@ const PostWidget = ({
     const primary = palette.primary.main;
 
     const patchUpvote = async () => {
-        console.log("went in here");
         const response = await fetch(`http://localhost:3001/posts/${postId}/upvote`, {
             method: "PATCH",
             headers: {
@@ -55,9 +53,11 @@ const PostWidget = ({
             },
             body: JSON.stringify({ userId: loggedInUserId }),
         });
-        console.log("passed through")
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
+        // isUpvoted = Boolean(upvotes[loggedInUserId]);
+        // isDownvoted = Boolean(downvotes[loggedInUserId]);
+        window.location.reload(false);
     };
 
     const patchDownvote = async () => {
@@ -71,6 +71,9 @@ const PostWidget = ({
         });
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }));
+        // isUpvoted = Boolean(upvotes[loggedInUserId]);
+        // isDownvoted = Boolean(downvotes[loggedInUserId]);
+        window.location.reload(false);
     };
 
     const fullPage = (postId) => {

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost, setPosts } from "state";
 import { useNavigate } from "react-router-dom";
+import CommentsWidget from "./CommentsWidget";
 
 const CommentWidget = ({
     commentId,
@@ -76,31 +77,31 @@ const CommentWidget = ({
         width="100%"
         >
             
-                <Box>
-                    <Box
-                        display = "flex"
-                        justifyContent = "flex-start"
-                        alignItems = "center"
-                        gap="30px"
+            <Box>
+                <Box
+                    display = "flex"
+                    justifyContent = "flex-start"
+                    alignItems = "center"
+                    gap="30px"
+                >
+                    <UserImage image={userPicturePath} />
+                    <Typography
+                        color={main}
+                        variant="h5"
+                        fontWeight="500"
+                        sx={{
+                            "&:hover": {
+                                color: palette.primary.light,
+                                cursor: "pointer",
+                            },
+                        }}
+                        onClick={() => navigate(`/profile/${commentUserId}`)}
                     >
-                        <UserImage image={userPicturePath} />
-                        <Typography
-                            color={main}
-                            variant="h5"
-                            fontWeight="500"
-                            sx={{
-                                "&:hover": {
-                                    color: palette.primary.light,
-                                    cursor: "pointer",
-                                },
-                            }}
-                            onClick={() => navigate(`/profile/${commentUserId}`)}
-                        >
-                            {username}
-                        </Typography>
-                    </Box>
-            
+                        {username}
+                    </Typography>
                 </Box>
+        
+            </Box>
             <Box
                 key={postId} onClick={() => fullPage(postId)}
             >    
@@ -149,7 +150,7 @@ const CommentWidget = ({
                 </FlexBetween>
             </FlexBetween>
         </WidgetWrapper>
-    )
+        )
 }
 
 export default CommentWidget;

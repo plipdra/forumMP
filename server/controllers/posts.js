@@ -89,6 +89,25 @@ export const getUserPosts = async (req, res) => {
     }
 }
 
+export const getFilteredPosts = async (req, res) => {
+    console.log("Server GetFilteredPosts");
+    try {
+        const { filter } = req.params;
+        let post = "";
+
+        if (filter === "New") {
+            post = await Post.find().sort( { createdAt: -1 } );
+        } else if (filter === "Trending") {
+            post = await Post.find().sort({ upvotes: -1 });
+        }
+        console.log(post);
+        res.status(200).json(post);
+    } catch (err) {
+        console.log("error in getFilteredPosts")
+        res.status(404).json({ message: err.message });
+    }
+}
+
 /* UPDATE */
 export const upvotePost = async (req, res) => {
     console.log("Reached upvotePost func")
@@ -123,9 +142,10 @@ export const upvotePost = async (req, res) => {
         const updatedPost = await Post.findByIdAndUpdate (
             postId, 
             { upvotes: post.upvotes },
+            { downvotes: post.downvotes },
             { new: true }
         );
-
+        console.log(updatedPost)
         res.status(200).json(updatedPost);
     } catch (err) {
         console.log("error with upvotePost");
@@ -163,11 +183,12 @@ export const downvotePost = async (req, res) => {
         console.log("after ifelse; ", "upvotes: ", post.upvotes, "downvotes: ", post.downvotes);
 
         const updatedPost = await Post.findByIdAndUpdate (
-            postId, 
+            postId,             
             { downvotes: post.downvotes },
+            { upvotes: post.upvotes },
             { new: true }
         );
-
+        console.log(updatedPost)
         res.status(200).json(updatedPost);
     } catch (err) {
         console.log("error with downvotePost");

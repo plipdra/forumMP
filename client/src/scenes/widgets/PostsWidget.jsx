@@ -5,6 +5,7 @@ import PostWidget from "./PostWidget";
 
 const PostsWidget = ({ userId, isProfile = false }) => {
     const dispatch = useDispatch();
+    const filter = useSelector((state) => state.order);
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
     let isTherePost = false;
@@ -39,11 +40,28 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         console.log(posts, "getUserPosts");
     };
 
+    const getFilteredPosts = async () => {
+        console.log("getFilteredPosts")
+        const response = await fetch(`http://localhost:3001/posts/order/${filter}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}`},
+        });
+        // getPosts();
+        const data = await response.json();
+        dispatch(setPosts({ posts: data }));
+        console.log(posts, "getFilteredPosts");
+    }
+
     useEffect(() => {
         if (isProfile) {
             getUserPosts();
         } else {
-            getPosts();
+            if (filter) {
+                getFilteredPosts();
+            } else {
+                getPosts();
+            }
+            // getPosts();
         }
     }, []);
 
@@ -69,10 +87,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
 
     if (!isTherePost){
-        console.log("hey?");
         return (<h1>ala boii?</h1>);
-    } else {
-        console.log("helo");
     }
 
     // return (console.log(posts))

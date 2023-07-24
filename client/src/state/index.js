@@ -7,6 +7,7 @@ const initialState = {
     posts: [],
     comments: [],
     fullPost: null,
+    order: "New",
     filter: "posts",
 };
 
@@ -26,6 +27,9 @@ export const authSlice = createSlice({
             state.user = null;
             state.token = null;
             console.log(state.user);
+        },
+        setOrder: (state) => {
+            state.order = state.order === "New" ? "Trending" : "New";
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;
@@ -66,5 +70,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setMode, setLogin, setLogout, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setOrder, setPosts, setFullPost, setPost, setComments, setComment, setFilterProfile } = authSlice.actions;
 export default authSlice.reducer;

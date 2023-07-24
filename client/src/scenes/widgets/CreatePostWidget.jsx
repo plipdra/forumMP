@@ -47,6 +47,7 @@ const CreatePostWidget = ({ picturePath }) => {
         setImage(null);
         setTitle("");
         setDesc("");
+        window.location.reload(false);
     };
 
     return (
