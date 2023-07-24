@@ -45,8 +45,8 @@ const CreateCommentWidget = ({ postId, picturePath }) => {
 
         const response = await fetch(`http://localhost:3001/comments`, {
             method: "POST",
-            headers: { Authorization: `Bearer ${token}` },
-            body: JSON.stringify(commentData),
+            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ postId: postId, userId: _id, commentText: text }),
         });
         console.log("response pending");
         const comments = await response.json();
@@ -72,7 +72,7 @@ const CreateCommentWidget = ({ postId, picturePath }) => {
                 />
                 <Button
                     disabled={!text}
-                    onClick={handleComment}
+                    onClick={() => {handleComment(); window.location.reload(false)}}
                     sx={{
                         color: palette.background.alt,
                         backgroundColor: palette.primary.main,

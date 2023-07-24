@@ -62,6 +62,7 @@ const CommentWidget = ({
 
     if (shouldRerender) {
         console.log("rerender")
+        window.location.reload(false);
         return null;
     }
 

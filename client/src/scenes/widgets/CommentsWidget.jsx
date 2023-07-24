@@ -28,8 +28,10 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
             headers: { Authorization: `Bearer ${token}`},
         });
         const data = await response.json();
+        console.log("asdfsfdgsrgsdgsdf", data)
         dispatch(setComments({ comments: data }));
         console.log(comments, "getComments");
+        // window.location.reload(false);
     };
 
     const getUserComments = async () => {

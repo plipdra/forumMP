@@ -205,7 +205,6 @@ const PostWidget = ({
                         <IconButton onClick={fullPage}>
                             <ChatOutlined />
                         </IconButton>
-                        <Typography>{comments.length}</Typography>
                     </FlexBetween>
                     {isUserPoster && (
                         <FlexBetween>

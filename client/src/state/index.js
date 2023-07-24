@@ -26,6 +26,11 @@ export const authSlice = createSlice({
         setLogout: (state) => {
             state.user = null;
             state.token = null;
+            state.users = [];
+            state.posts = [];
+            state.comments = [];
+            state.fullPost = null;
+            state.order = "New";
             console.log(state.user);
         },
         setOrder: (state) => {

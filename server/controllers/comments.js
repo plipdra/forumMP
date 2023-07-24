@@ -21,6 +21,7 @@ export const createComment = async (req, res) => {
         await newComment.save();
 
         const comment = await Comment.find();
+        console.log(comment);
         res.status(201).json(comment);
     } catch (err) {
         res.status(409).json({ message: err.message })
@@ -34,7 +35,7 @@ export const getComments = async (req, res) => {
         const { postId } = req.params;
         console.log("PostIdasd: ", postId)
         const comment = await Comment.find({ postId });
-        console.log(comment)
+        console.log("comments asd", comment)
         res.status(200).json(comment);
     } catch (err) {
         res.status(404).json({ message: err.message })
