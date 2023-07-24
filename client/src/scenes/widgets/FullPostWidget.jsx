@@ -27,7 +27,7 @@ const FullPostWidget = ({ postId }) => {
 
     return (
         <>
-            {[fullPost].map(
+            {[fullPost]?.map(
                 ({
                     _id,
                     userId,
