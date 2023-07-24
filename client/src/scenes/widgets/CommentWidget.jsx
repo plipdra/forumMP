@@ -17,11 +17,12 @@ import { setPost, setPosts } from "state";
 import { useNavigate } from "react-router-dom";
 
 const CommentWidget = ({
-    postId,
     commentId,
+    commentText,
+    postId,
     commentUserId,
     username,
-    text,
+    replies,
     userPicturePath,
 }) => {
     const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const CommentWidget = ({
     const loggedInUserId = useSelector((state) => state.user._id);
     let isUserPoster = false;
     const [ shouldRerender, setShouldRerender ] = useState(false);
+
+    console.log("params: ", commentText)
 
     const { palette } = useTheme();
     const main = palette.neutral.main;
@@ -61,7 +64,7 @@ const CommentWidget = ({
         return null;
     }
 
-    if (loggedInUserId === postUserId) {
+    if (loggedInUserId === commentUserId) {
         isUserPoster = true;
     }
 
@@ -91,7 +94,7 @@ const CommentWidget = ({
                                     cursor: "pointer",
                                 },
                             }}
-                            onClick={() => navigate(`/profile/${postUserId}`)}
+                            onClick={() => navigate(`/profile/${commentUserId}`)}
                         >
                             {username}
                         </Typography>
@@ -107,8 +110,9 @@ const CommentWidget = ({
                     sx={{
                         mt: "1rem"
                     }}
+                    ml={"4.4rem"}
                 >
-                    {text}
+                    {commentText}
                 </Typography>              
             </Box>
 
@@ -123,13 +127,14 @@ const CommentWidget = ({
                         <IconButton onClick={fullPage}>
                             <ChatOutlined />
                         </IconButton>
-                        <Typography>{comments.length}</Typography>
+                        <Typography>Reply</Typography>
                     </FlexBetween>
                     {isUserPoster && (
                         <FlexBetween>
                             <IconButton onClick={editComment}>
                                 <EditOutlined />
                             </IconButton>
+                            <Typography>Edit</Typography>
                         </FlexBetween>
                     )}
                     {isUserPoster && (
@@ -137,6 +142,7 @@ const CommentWidget = ({
                             <IconButton onClick={deleteComment}>
                                 <DeleteOutline />
                             </IconButton>
+                            <Typography>Delete</Typography>
                         </FlexBetween>
                     )}
                 </FlexBetween>

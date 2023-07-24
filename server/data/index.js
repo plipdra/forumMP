@@ -85,8 +85,8 @@ export const posts = [
     username: "ernesto",
     title: "FIREWORKS!!!",
     description: "They go kaboom!",
-    picturePath: "axolotol.png",
-    userPicturePath: "",
+    picturePath: "post4.jpeg",
+    userPicturePath: "axolotol.png",
     upvotes: new Map([
       [userIds[1], true],
       [userIds[2], true],
@@ -95,15 +95,11 @@ export const posts = [
     downvotes: new Map([
       [userIds[4], true],
     ]),
-    comments: [
-      "wow so bomb",
-      "very boomy",
-      "I like the byoom",
-    ],
+    comments: [],
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: "64bb49f55f83c34f73d4eb40",
+    userId: "64bdb8833813c74809cb2f6c",
     username: "fafa",
     title: "Egz >>",
     description: "I ordered this super yummy breakfast at ate rica's bacsilog!",
@@ -116,9 +112,18 @@ export const posts = [
     downvotes: new Map([
       [userIds[3], true],
     ]),
-    comments: [
-      "I agree",
-      "I do not",
-    ],
+    comments: [ { _id: userIds[0] } ],
   },
 ];
+
+export const comments = [
+  {
+    _id: userIds[0],
+    commentText: "Boom!",
+    postId: "64bdb7a5c965eb6d50cd86ca",
+    userId: "64bdb8833813c74809cb2f6c",
+    userPicturePath: "defaultUser.png",
+    username: "fafa",
+    replies: [],
+  }
+]

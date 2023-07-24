@@ -38,7 +38,7 @@ const CreateCommentWidget = ({ postId, picturePath }) => {
         const response = await fetch(`http://localhost:3001/comments/`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
-            body: formData,
+            body: JSON.stringify({ userId: _id, postId: postId, commentText: text }),
         });
         console.log("response pending");
         const comments = await response.json();

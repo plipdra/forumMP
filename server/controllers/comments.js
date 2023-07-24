@@ -9,6 +9,7 @@ export const createComment = async (req, res) => {
     console.log("Inside createComment");
     try {
         const { postId, userId, commentText } = req.body;
+        console.log(postId)
         const user = await User.findById(userId);
         const newComment = new Comment({
             postId,
@@ -45,9 +46,12 @@ export const createComment = async (req, res) => {
 
 /* READ */
 export const getComments = async (req, res) => {
+    console.log("getComments");
     try {
         const { postId } = req.params;
-        const comment = await Comment.findById({ postId });
+        console.log("PostIdasd: ", postId)
+        const comment = await Comment.find({ postId });
+        console.log(comment)
         res.status(200).json(comment);
     } catch (err) {
         res.status(404).json({ message: err.message })

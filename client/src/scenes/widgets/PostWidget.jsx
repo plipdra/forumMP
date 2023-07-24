@@ -28,6 +28,7 @@ const PostWidget = ({
     downvotes,
     comments,
 }) => {
+    console.log("post param: ", postId)
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
@@ -208,6 +209,7 @@ const PostWidget = ({
                             <IconButton onClick={editPost}>
                                 <EditOutlined />
                             </IconButton>
+                            <Typography>Edit</Typography>
                         </FlexBetween>
                     )}
                     {isUserPoster && (
@@ -215,6 +217,7 @@ const PostWidget = ({
                             <IconButton onClick={deletePost}>
                                 <DeleteOutline />
                             </IconButton>
+                            <Typography>Delete</Typography>
                         </FlexBetween>
                     )}
                 </FlexBetween>

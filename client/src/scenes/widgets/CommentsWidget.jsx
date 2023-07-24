@@ -4,7 +4,7 @@ import { setPosts, setComments } from "state";
 import PostWidget from "./PostWidget";
 import CommentWidget from "./CommentWidget";
 
-const CommentsWidget = ({ userId, isProfile = false }) => {
+const CommentsWidget = ({ postId, userId, isProfile = false }) => {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments);
     const token = useSelector((state) => state.token);
@@ -44,6 +44,7 @@ const CommentsWidget = ({ userId, isProfile = false }) => {
         if (isProfile) {
             getUserComments();
         } else {
+            console.log("goes in")
             getComments();
         }
     }, []);
@@ -61,7 +62,7 @@ const CommentsWidget = ({ userId, isProfile = false }) => {
             }        
         }
     } else {
-        if (posts) {
+        if (comments) {
             isThereComment = true;
         } else {
             isThereComment = false;
@@ -76,26 +77,29 @@ const CommentsWidget = ({ userId, isProfile = false }) => {
         console.log("helo");
     }
 
-    // return (console.log(posts))
+    // return (console.log("return: ", comments))
+    console.log("commesnts", comments)
 
     return (
         <>
-            {[comments].map(
+            {comments.map(
                 ({
                     _id,
+                    commentText,
                     postId,
                     userId,
                     username,
-                    text,
+                    replies,
                     userPicturePath,
-                }) => (
+                }, index) => (
                     <CommentWidget
-                        key={_id}
-                        postId={postId}
+                        key={index}
                         commentId={_id}
+                        commentText={commentText}
+                        postId={postId}
                         commentUserId={userId}
                         username={username}
-                        text={text}
+                        replies={replies}
                         userPicturePath={userPicturePath}
                     />
                 )

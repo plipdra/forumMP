@@ -29,6 +29,30 @@ export const createPost = async (req, res) => {
     }
 }
 
+export const addComment = async (req, res) => {
+    try {
+        const { commentId } = req.body;
+        const comment = await Comment.findById(commentId);
+        const post = await Post.findById(comment.postId);
+
+        Post.findByIdAndUpdate(
+            post.postId,
+            { $push: { comments: comment._id }},
+            { new: true },
+            (err, updatedPost) => {
+                if (err) {
+                    console.error("error updating post with comment: ", err);
+                } else {
+                    console.log("Comment added to the post: ", updatedPost);
+                }
+            }
+        )
+        res.status(201).json(updatedPost);
+    } catch (err) {
+        res.status(409).json({ message: err.message });
+    }
+}
+
 /* READ */
 export const getPost = async (req, res) => {
     console.log("GetPost");
