@@ -4,57 +4,15 @@ import {
 
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme, Button, Avatar } from "@mui/material";
-import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { setOrder } from "state";
 
-const SortWidget = ({ userId, picturePath }) => {
-    const [user, setUser] = useState(null);
+const SortWidget = () => {
     const { palette } = useTheme();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const loggedInUser = useSelector((state) => state.user);
-    const token = useSelector((state) => state.token);
     const order = useSelector((state) => state.order);
-    const dark = palette.neutral.dark;
-    const medium = palette.neutral.medium;
-    const main = palette.neutral.main;
-    let isUser = false;
-
-    console.log("user: ", user, "loggedInUser: ", loggedInUser)
-
-    const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`,
-        {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        const data = await response.json();
-        setUser(data);
-    };
-
-    useEffect(() => {
-        getUser();
-    }, [])
-
-    if (!user) {
-        return null;
-    }
-
-    if (loggedInUser._id === user._id) {
-        isUser = true;
-    } else {
-        isUser = false;
-    }
-
-    const {
-        username,
-        email,
-    } = user;
 
     return (
         <WidgetWrapper

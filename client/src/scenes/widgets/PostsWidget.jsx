@@ -23,13 +23,16 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
     };
 
     const getUserPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-        console.log(posts, "getUserPosts");
+        if (userId) {
+            const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
+                method: "GET",
+                headers: { Authorization: `Bearer ${token}`},
+            });
+            const data = await response.json();
+            dispatch(setPosts({ posts: data }));
+            console.log(posts, "getUserPosts");
+        }
+
     };
 
     const getFilteredPosts = async () => {
@@ -90,7 +93,7 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
         return (<Typography variant={"h3"}>No Results Found.</Typography>);
     }
 
-    // return (console.log(posts))
+    return (console.log(posts))
 
     return (
         <>

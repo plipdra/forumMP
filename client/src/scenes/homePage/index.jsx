@@ -41,7 +41,7 @@ const HomePage = () => {
                 )}
             </Box>            
         )}
-        {/* {!user && (
+        {!user && (
             <Box
                 width="100%"
                 padding="2rem 6%"
@@ -49,11 +49,15 @@ const HomePage = () => {
                 gap="0.5rem"
                 justifyContent="space-between"
             >
+                <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+                </Box>
                 <Box
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
-                    <PostsWidget userId={user._id} />
+                    <SortWidget />
+                    <Box m={"2rem"} />
+                    <PostsWidget />
                     
                 </Box>
                 {isNonMobileScreens && (
@@ -61,7 +65,7 @@ const HomePage = () => {
                     </Box>
                 )}
             </Box>         
-        )} */}
+        )}
 
     </Box>
     );
