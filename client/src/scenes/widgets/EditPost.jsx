@@ -1,18 +1,54 @@
 import * as React from 'react';
+import { useState, useEffect } from "react";
 import { Button } from "@mui/base";
 import { Box, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import Navbar from "scenes/navbar";
 import "../profilePage/settings.css"
 import { useTheme } from '@emotion/react';
+import { setEditPost, setPost } from 'state';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const EditPost = () => {
+const EditPost = ({ postId }) => {
   const { palette } = useTheme();
+  const [title, setTitle] = useState("");
+  const [description, setDesc] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
   const dark = palette.neutral.light;
+  console.log(postId, "lol")
+
+  const getPost = async () => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    setTitle(data.title);
+    setDesc(data.description);
+    dispatch(setEditPost({ EditPost: data }));
+  };
+
+  const editPostContent = async () => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}/edit`, {
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title, description: description }),
+    });
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+    navigate(`/posts/${postId}`);
+    
+  }
+
+  useEffect(() => {
+    getPost();
+  }, []);
 
   return(
     <Box>
-      <Navbar></Navbar>
       <Box
       width={"80%"}
       height={"fit-content"}
@@ -35,15 +71,17 @@ const EditPost = () => {
           <TextField
             label="New Title"
             id="outlined-size-small"
-            defaultValue="<old title>"
             size="small"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
             sx={{margin: "auto"}}
           /><br/>
           <TextField rows={4} multiline
-          label="Description" id="outlined-size-normal" defaultValue="<old description>" fullWidth />
+            onChange={(e) => setDesc(e.target.value)}
+          label="Description" id="outlined-size-normal" value={description} fullWidth />
         </Box>
         <Stack direction="row" spacing={2}>
-        <Button variant="contained" className='save'>
+        <Button variant="contained" className='save' disabled={!title || !description} onClick={editPostContent} >
           Confirm Edit
         </Button>
         <Button variant="outlined" className='cancel'>

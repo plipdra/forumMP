@@ -110,6 +110,27 @@ export const getFilteredPosts = async (req, res) => {
     }
 }
 
+export const getEditedTag = async (req, res) => {
+    console.log("Server getEditedTag");
+    try {
+        const { postId } = req.params;
+        const post = Post.find({postId});
+        const isEdited = post.isEdited;
+
+        // if (post) {
+        //     console.log("if", post.isEdited)
+        //     res.status(200).json(true);
+        // } else {
+        //     console.log("else", post.isEdited)
+        //     res.status(200).json(false);
+        // }
+        // res.status(200).json(post);
+    } catch (err) {
+        console.log("error in getEditedTag")
+        res.status(404).json({ message: err.message });        
+    }
+}
+
 /* UPDATE */
 export const upvotePost = async (req, res) => {
     console.log("Reached upvotePost func")
@@ -194,6 +215,40 @@ export const downvotePost = async (req, res) => {
         res.status(200).json(updatedPost);
     } catch (err) {
         console.log("error with downvotePost");
+        res.status(404).json({ message: err.message })
+    }
+}
+
+export const editPost = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const { title, description } = req.body;
+        const post = await Post.findById(postId);
+
+        post.title = title;
+        post.description = description;
+
+        console.log("the desc", post.description);
+
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { title: post.title },
+            { New: true }
+        );
+        const updatedPost2 = await Post.findByIdAndUpdate(
+            postId,
+            { description: post.description },
+            { New: true }
+        );
+        const updatedPost3 = await Post.findByIdAndUpdate(
+            postId,
+            { isEdited: true },
+            { New: true }
+        );
+        console.log(updatedPost, "post");
+        res.status(200).json(updatedPost3);
+    } catch (err) {
+        console.log("error in editPost");
         res.status(404).json({ message: err.message })
     }
 }

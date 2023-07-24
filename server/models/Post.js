@@ -29,6 +29,10 @@ const PostSchema = new mongoose.Schema(
             type: Map,
             of: Boolean,
         },
+        isEdited: {
+            type: Boolean,
+            default: false,
+        },
         comments: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment',

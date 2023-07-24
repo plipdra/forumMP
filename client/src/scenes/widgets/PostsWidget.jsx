@@ -105,7 +105,6 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
                     userPicturePath,
                     upvotes,
                     downvotes,
-                    comments,
                 }) => (
                     <PostWidget
                         key={_id}
@@ -118,7 +117,6 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
                         userPicturePath={userPicturePath}
                         upvotes={upvotes}
                         downvotes={downvotes}
-                        comments={comments}
                     />
                 )
             )}

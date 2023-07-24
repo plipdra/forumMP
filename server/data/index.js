@@ -80,7 +80,7 @@ export const users = [
 
 export const posts = [
   {
-    _id: new mongoose.Types.ObjectId(),
+    _id: "64bdb7a5c965eb6d50cd86ca",
     userId: "64bca19b94953308c00d0501",
     username: "ernesto",
     title: "FIREWORKS!!!",
@@ -95,6 +95,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[4], true],
     ]),
+    isEdited: false,
     comments: [],
   },
   {
@@ -112,6 +113,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[3], true],
     ]),
+    isEdited: false,
     comments: [ { _id: userIds[0] } ],
   },
 ];

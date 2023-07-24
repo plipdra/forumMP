@@ -11,6 +11,7 @@ import { themeSettings } from "theme";
 import UserSettings from "scenes/profilePage/settings"
 import SearchPage from "scenes/searchPage";
 import EditPost from "scenes/widgets/EditPost";
+import EditPostPage from "scenes/postPage/edit";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -28,7 +29,7 @@ function App() {
             <Route path="/posts/:postId" element={<PostPage />} />
             <Route path="/profile/:userId/settings" element={<UserSettings />} />
             <Route path="/search/:value" element={<SearchPage />} />
-            <Route path="/edit/:postId" element={<EditPost />} />
+            <Route path="/posts/:postId/edit" element={<EditPostPage />} />
             {/* <Route path="/posts/:id" render={(props) => (<PostPage id={props.match.params.id}/>)} /> */}
           </Routes>
         </ThemeProvider>
