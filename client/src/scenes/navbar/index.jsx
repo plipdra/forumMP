@@ -132,7 +132,7 @@ const Navbar = () => {
                 <Box 
                 position="fixed"
                 top="5.9%"
-                right="0"
+                right="4.2%"
                 bottom="0"
                 height="25%"
                 zIndex="10"

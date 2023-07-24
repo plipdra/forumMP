@@ -18,24 +18,7 @@ export const createComment = async (req, res) => {
             commentText,
             userPicturePath: user.picturePath,
         })
-        await newComment.save((err, savedComment) => {
-            if (err) {
-                console.error('Error saving comment: ', err);
-            } else {
-                Post.findByIdAndUpdate(
-                    postId,
-                    { $push: { comments: savedComment._id }},
-                    { new: true },
-                    (err, updatedPost) => {
-                        if (err) {
-                            console.error("error updating post with comment: ", err);
-                        } else {
-                            console.log("Comment added to the post: ", updatedPost);
-                        }
-                    }
-                )
-            }
-        });
+        await newComment.save();
 
         const comment = await Comment.find();
         res.status(201).json(comment);

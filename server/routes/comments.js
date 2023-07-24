@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/:postId/comments", verifyToken, getComments);
 router.get("/:userId/comments", verifyToken, getUserComments);
 
-router.post("/", verifyToken, createComment);
+// router.post("/", verifyToken, createComment);
 
 /* UPDATE */
 

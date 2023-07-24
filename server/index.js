@@ -19,6 +19,7 @@ import User from "./models/User.js";
 import Post from "./models/Post.js";
 import Comment from "./models/Comment.js";
 import { users, posts, comments } from "./data/index.js";
+import { createComment } from "./controllers/comments.js";
 
 /* CONFIGURATIONS */ // github repo of respective modules
 const __filename = fileURLToPath(import.meta.url);
@@ -48,6 +49,8 @@ const upload = multer({ storage });
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register); // can remove; not rlly needed
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
+
+app.post("/comments", verifyToken, createComment);
 
 /* ROUTES */
 app.use("/auth", authRoutes); // login / register

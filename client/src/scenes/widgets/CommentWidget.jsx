@@ -111,6 +111,7 @@ const CommentWidget = ({
                         mt: "1rem"
                     }}
                     ml={"4.4rem"}
+                    mb={"1rem"}
                 >
                     {commentText}
                 </Typography>              
