@@ -26,6 +26,7 @@ const PostWidget = ({
     userPicturePath,
     upvotes,
     downvotes,
+    isEdited,
 }) => {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments);
@@ -34,7 +35,6 @@ const PostWidget = ({
     const loggedInUserId = useSelector((state) => state.user._id);
     let isUserPoster = false;
     const [ shouldRerender, setShouldRerender ] = useState(false);
-    const [ isEdited, setEdited ] = useState(false);
 
     let isUpvoted = Boolean(upvotes[loggedInUserId]);
     let isDownvoted = Boolean(downvotes[loggedInUserId]);
@@ -75,18 +75,6 @@ const PostWidget = ({
         // isDownvoted = Boolean(downvotes[loggedInUserId]);
         window.location.reload(false);
     };
-
-    const checkEditedTag = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}/isEdited`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        const data = await response.json();
-        setEdited(data);
-        console.log(isEdited, "checkEditedTag");
-    }
-
-    // checkEditedTag();
 
     const fullPage = (postId) => {
         navigate(`/posts/${postId}`);
@@ -130,6 +118,7 @@ const PostWidget = ({
     if (loggedInUserId === postUserId) {
         isUserPoster = true;
     }
+
     return (
         <WidgetWrapper
         m="2rem 0"
@@ -160,9 +149,9 @@ const PostWidget = ({
                         >
                             {username}
                         </Typography>
-                        {isEdited && (
+                        {isEdited ? (
                             <Typography variant="h7">(Edited)</Typography>
-                        )}
+                        ) : (<Typography />)}
                         
                     </Box>
 

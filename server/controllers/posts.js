@@ -117,14 +117,14 @@ export const getEditedTag = async (req, res) => {
         const post = Post.find({postId});
         const isEdited = post.isEdited;
 
-        // if (post) {
-        //     console.log("if", post.isEdited)
-        //     res.status(200).json(true);
-        // } else {
-        //     console.log("else", post.isEdited)
-        //     res.status(200).json(false);
-        // }
-        // res.status(200).json(post);
+        if (post) {
+            console.log("if", post.isEdited)
+            res.status(200).json(true);
+        } else {
+            console.log("else", post.isEdited)
+            res.status(200).json(false);
+        }
+        res.status(200).json(post);
     } catch (err) {
         console.log("error in getEditedTag")
         res.status(404).json({ message: err.message });        
@@ -233,17 +233,17 @@ export const editPost = async (req, res) => {
         const updatedPost = await Post.findByIdAndUpdate(
             postId,
             { title: post.title },
-            { New: true }
+            { new: true }
         );
         const updatedPost2 = await Post.findByIdAndUpdate(
             postId,
             { description: post.description },
-            { New: true }
+            { new: true }
         );
         const updatedPost3 = await Post.findByIdAndUpdate(
             postId,
             { isEdited: true },
-            { New: true }
+            { new: true }
         );
         console.log(updatedPost, "post");
         res.status(200).json(updatedPost3);
