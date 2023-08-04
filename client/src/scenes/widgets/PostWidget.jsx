@@ -239,16 +239,17 @@ const PostWidget = ({
                         <FlexBetween>
                             <IconButton key={postId} onClick={() => editPost(postId)}>
                                 <EditOutlined />
+                                <Typography>Edit</Typography>
                             </IconButton>
-                            <Typography>Edit</Typography>
                         </FlexBetween>
                     )}
                     {isUserPoster && (
                         <FlexBetween>
                             <IconButton onClick={deletePost}>
                                 <DeleteOutline />
+                                <Typography cursor="pointer">Delete</Typography>
                             </IconButton>
-                            <Typography>Delete</Typography>
+                            
                         </FlexBetween>
                     )}
                 </FlexBetween>

@@ -53,15 +53,12 @@ export const authSlice = createSlice({
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;
-            console.log(state.posts);
         },
         setFullPost: (state, action) => {
             state.fullPost = action.payload.fullPost;
-            console.log(state.fullPost);
         },
         setEditPost: (state, action) => {
             state.editPost = action.payload.editPost;
-            console.log(state.editPost);
         },
         setPost: (state, action) => {
             const updatedPosts = state.posts.map((post) => {
@@ -75,7 +72,6 @@ export const authSlice = createSlice({
         },
         setComments: (state, action) => {
             state.comments = action.payload.comments;
-            console.log(state.comments);
         },
         setComment: (state, action) => {
             const updatedComments = state.posts.map((comment) => {
