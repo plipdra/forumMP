@@ -110,27 +110,6 @@ export const getFilteredPosts = async (req, res) => {
     }
 }
 
-export const getEditedTag = async (req, res) => {
-    console.log("Server getEditedTag");
-    try {
-        const { postId } = req.params;
-        const post = Post.find({postId});
-        const isEdited = post.isEdited;
-
-        if (post) {
-            console.log("if", post.isEdited)
-            res.status(200).json(true);
-        } else {
-            console.log("else", post.isEdited)
-            res.status(200).json(false);
-        }
-        res.status(200).json(post);
-    } catch (err) {
-        console.log("error in getEditedTag")
-        res.status(404).json({ message: err.message });        
-    }
-}
-
 /* UPDATE */
 export const upvotePost = async (req, res) => {
     console.log("Reached upvotePost func")
