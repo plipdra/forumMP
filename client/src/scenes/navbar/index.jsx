@@ -98,7 +98,7 @@ const Navbar = () => {
                         }}    
                         input={<InputBase />}
                     >
-                        <MenuItem value={username}>
+                        <MenuItem value={username} onClick={() => {navigate(`/profile/${user._id}`)}}>
                             <Typography>{username}</Typography>
                         </MenuItem>
                         <MenuItem onClick={() => {dispatch(setLogout()); navigate("/")}}>Log Out</MenuItem>
@@ -171,7 +171,7 @@ const Navbar = () => {
                                 }}    
                                 input={<InputBase />}
                             >
-                                <MenuItem value={username}>
+                                <MenuItem value={username} onClick={() => {navigate(`/profile/${user._id}`)}}>
                                     <Typography>{username}</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
