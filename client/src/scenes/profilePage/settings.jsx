@@ -4,13 +4,16 @@ import { Box, useTheme, InputBase, Divider, Button } from "@mui/material";
 import DeleteUserAlert from "components/DeleteUserAlert";
 import Input from '@mui/base/Input';
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "state";
 //TODO add settings
 const UserSettings = () => {
   const [pageType, setPageType] = useState("editProfile");
   const [username, setUsername] = useState("");
   const [about, setAbout] = useState("");
   const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
   const { palette } = useTheme();
   const isEditProfile = pageType === "editProfile";
   const isEditAccount = pageType === "editAccount";
@@ -22,19 +25,18 @@ const UserSettings = () => {
 
     console.log(formData);
 
-    // const response = await fetch(`http://localhost:3001/users/${userId}/edit`, {
-    //     method: "PATCH",
-    //     headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: formData,
-    // });
-    // const updatedPost = await response.json();
-    // dispatch(setPost({ post: updatedPost }));
-    // isUpvoted = Boolean(upvotes[loggedInUserId]);
-    // isDownvoted = Boolean(downvotes[loggedInUserId]);
-    // window.location.reload(false);
+    const response = await fetch(`http://localhost:3001/users/${user._id}/edit`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, about: about }),
+    });
+    const updatedUser = await response.json();
+    dispatch(setUser({ user: updatedUser }));
+    console.log(user);
+    window.location.reload(false);
 };
 
   const changeState = () => {

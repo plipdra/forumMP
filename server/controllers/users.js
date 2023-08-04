@@ -20,17 +20,30 @@ export const editUser = async (req, res) => {
         const { username, about } = req.body;
         const user = await User.findById(id);
 
-        user.username = username;
-        user.about = about;
+        if (username) {
+            user.username = username;
+            console.log("username line 25");
+        }
+        if (about) {
+            user.about = about;
+            console.log("about line 29");
+        }
 
-        const updatedUser = User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             id,
             { username: user.username },
+            { new: true }
+        );
+        console.log("updatedUser1", updatedUser);
+        console.log("Updating about...");
+        const updatedUser2 = await User.findByIdAndUpdate(
+            id,
             { about: user.about },
             { new: true }
         );
-        console.log(updatedUser);
-        res.status(200).json(updatedUser);
+
+        console.log("this is the user", updatedUser2);
+        res.status(200).json(updatedUser2);
 
     } catch (err) {
         console.log("error with editUser");

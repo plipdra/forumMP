@@ -127,7 +127,7 @@ const CommentWidget = ({
             <FlexBetween mt="0.25rem">
                 <FlexBetween gap="1rem">
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={fullPage}>
+                        <IconButton>
                             <ChatOutlined />
                         </IconButton>
                         <Typography>Reply</Typography>
