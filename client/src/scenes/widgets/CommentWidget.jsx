@@ -136,16 +136,16 @@ const CommentWidget = ({
                         <FlexBetween>
                             <IconButton onClick={editComment}>
                                 <EditOutlined />
-                            </IconButton>
                             <Typography>Edit</Typography>
+                            </IconButton>
                         </FlexBetween>
                     )}
                     {isUserPoster && (
                         <FlexBetween>
                             <IconButton onClick={deleteComment}>
                                 <DeleteOutline />
-                            </IconButton>
                             <Typography>Delete</Typography>
+                            </IconButton>
                         </FlexBetween>
                     )}
                 </FlexBetween>

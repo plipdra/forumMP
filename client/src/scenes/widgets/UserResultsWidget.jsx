@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts, setUsers } from "state";
-import PostWidget from "./PostWidget";
+import { setUsers } from "state";
 import UserResultWidget from "./UserResultWidget";
 import { Typography } from "@mui/material";
 

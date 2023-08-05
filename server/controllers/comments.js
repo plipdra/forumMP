@@ -53,6 +53,36 @@ export const getUserComments = async (req, res) => {
     }
 }
 
+export const getSearchComments = async (req, res) => {
+    console.log("Server getSearchComments");
+    try {
+        const { query } = req.params;
+        console.log(query, "This is the query")
+
+        let regExVal = new RegExp(`\\b${query}\\b`);
+        console.log(regExVal)
+        let comment = await Comment.find( { $or: [ 
+            { username: { $regex: regExVal, $options: 'i' } },
+            { commentText: { $regex: regExVal, $options: 'i' } }
+        ]})
+
+        console.log("getting the comments...")
+
+        console.log("This is the comment", comment);
+        console.log("comment array length", comment.length)
+
+        if (comment.length > 0) {
+            console.log("went in here")
+            res.status(200).json(comment);
+        } else {
+            res.status(300).json(comment);
+        }
+    } catch (err) {
+        console.log("error in getSearchComments")
+        res.status(404).json({ message: err.message });
+    }
+}
+
 export const deleteComment = async (req, res) => {
     try {
         const { commentId } = req.params;

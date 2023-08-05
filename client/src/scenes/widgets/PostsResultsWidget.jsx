@@ -33,12 +33,6 @@ const PostsResultsWidget = ({ query = null }) => {
         getPosts();
     }, []);
 
-    // if (posts) {
-    //     isTherePost = true;
-    // } else {
-    //     isTherePost = false;
-    // }
-
     if (!isTherePost){
         return (<Typography variant={"h3"}>No Results Found.</Typography>);
     }

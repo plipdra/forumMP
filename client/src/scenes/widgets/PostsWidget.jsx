@@ -19,7 +19,6 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
-        // dispatch(setPosts({ posts: [] }));
         console.log(posts, "getPosts (search)");
     };
 
@@ -39,7 +38,6 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
-        // getPosts();
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
         console.log(posts, "getFilteredPosts");
@@ -58,7 +56,6 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
             } else {
                 getPosts();
             }
-            // getPosts();
         }
     }, []);
 

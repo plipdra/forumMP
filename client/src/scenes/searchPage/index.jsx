@@ -10,6 +10,7 @@ import UserResultsWidget from "scenes/widgets/UserResultsWidget";
 import CommentsWidget from "scenes/widgets/CommentsWidget";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import CommentsResultsWidget from "scenes/widgets/CommentsResultsWidget";
 
 const SearchPage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -70,7 +71,7 @@ const SearchPage = () => {
                     >
                         <Typography variant={"h2"}>Comments Results:</Typography>
                         <Divider />
-                        <CommentsWidget isSearch={true} query={value} />
+                        <CommentsResultsWidget query={value} />
                     </Box>
 
                     <Divider />
