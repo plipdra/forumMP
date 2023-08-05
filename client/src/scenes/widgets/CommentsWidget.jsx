@@ -11,17 +11,6 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
     const token = useSelector((state) => state.token);
     let isThereComment = false;
 
-    const searchComments = async () => {
-        // const response = await fetch(`http://localhost:3001/search/${query}`, {
-        //     method: "GET",
-        //     headers: { Authorization: `Bearer ${token}`},
-        // });
-        // const data = await response.json();
-        // dispatch(setComments({ comments: data }));
-        dispatch(setComments({ comments: [] }));
-        console.log(comments, "getComments");
-    }
-
     const getComments = async () => {
         const response = await fetch(`http://localhost:3001/comments/${postId}/comments`, {
             method: "GET",
@@ -48,8 +37,6 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
         if (isProfile) {
             console.log("do it go?")
             getUserComments();
-        } else if (isSearch) {
-            searchComments();
         } else {
             console.log("goes in")
             getComments();

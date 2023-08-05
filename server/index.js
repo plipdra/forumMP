@@ -19,7 +19,7 @@ import User from "./models/User.js";
 import Post from "./models/Post.js";
 import Comment from "./models/Comment.js";
 import { users, posts, comments } from "./data/index.js";
-import { createComment } from "./controllers/comments.js";
+import { createComment, createReply, getReplies } from "./controllers/comments.js";
 
 /* CONFIGURATIONS */ // github repo of respective modules
 const __filename = fileURLToPath(import.meta.url);
@@ -51,6 +51,9 @@ app.post("/auth/register", upload.single("picture"), register); // can remove; n
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.post("/comments", verifyToken, createComment);
+app.post("/comments/reply", verifyToken, createReply);
+app.use("/replies/:commentId", verifyToken, getReplies);
+
 
 /* ROUTES */
 app.use("/auth", authRoutes); // login / register

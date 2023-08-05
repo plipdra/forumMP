@@ -13,14 +13,41 @@ export const createComment = async (req, res) => {
         const user = await User.findById(userId);
         const newComment = new Comment({
             postId,
+            parentCommentId: null,
             userId,
             username: user.username,
             commentText,
+            isEdited: false,
             userPicturePath: user.picturePath,
         })
         await newComment.save();
 
         const comment = await Comment.find();
+        console.log(comment);
+        res.status(201).json(comment);
+    } catch (err) {
+        res.status(409).json({ message: err.message })
+    }
+}
+
+export const createReply = async (req, res) => {
+    console.log("Inside createReply");
+    try {
+        const { postId, parentCommentId, userId, commentText } = req.body;
+        console.log(postId)
+        const user = await User.findById(userId);
+        const newComment = new Comment({
+            postId,
+            parentCommentId,
+            userId,
+            username: user.username,
+            commentText,
+            isEdited: false,
+            userPicturePath: user.picturePath,
+        })
+        await newComment.save();
+
+        const comment = await Comment.find({parentCommentId});
         console.log(comment);
         res.status(201).json(comment);
     } catch (err) {
@@ -34,9 +61,36 @@ export const getComments = async (req, res) => {
     try {
         const { postId } = req.params;
         console.log("PostIdasd: ", postId)
-        const comment = await Comment.find({ postId });
-        console.log("comments asd", comment)
-        res.status(200).json(comment);
+        const comment = await Comment.find({ postId: postId, parentCommentId: null });
+
+        if (!comment.parentCommentId) {
+            console.log("normal comment", comment)
+            res.status(200).json(comment);
+        } else {
+            console.log("comment has parent id (is a reply)", comment)
+            res.status(300).json(comment);
+        }
+        
+    } catch (err) {
+        res.status(404).json({ message: err.message })
+    }
+}
+
+export const getReplies = async (req, res) => {
+    console.log("getReplies", req.params);
+    try {
+        const { commentId } = req.params;
+        console.log("parentId: ", commentId);
+        const comment = await Comment.find({ parentCommentId: commentId });
+
+        if (!comment.parentCommentId) {
+            console.log("normal reply", comment)
+            res.status(200).json(comment);
+        } else {
+            console.log("went in else")
+            res.status(300).json(null);
+        }
+        
     } catch (err) {
         res.status(404).json({ message: err.message })
     }

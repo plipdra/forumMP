@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPost, setPosts } from "state";
 import { useNavigate } from "react-router-dom";
 import CommentsWidget from "./CommentsWidget";
+import CreateCommentWidget from "./CreateCommentWidget";
+import RepliesWidget from "./RepliesWidget";
 
 const CommentWidget = ({
     commentId,
@@ -30,9 +32,11 @@ const CommentWidget = ({
     const comments = useSelector((state) => state.comments);
     const token = useSelector((state) => state.token);
     const navigate = useNavigate();
+    const loggedInUser = useSelector((state) => state.user);
     const loggedInUserId = useSelector((state) => state.user._id);
     let isUserPoster = false;
     const [ shouldRerender, setShouldRerender ] = useState(false);
+    const [ isReplies, setIsReplies ] = useState(false);
 
     console.log("params: ", commentText)
 
@@ -71,86 +75,102 @@ const CommentWidget = ({
     }
 
     return (
-        <WidgetWrapper
-        m="2rem 0"
-        display='flex'
-        flexDirection='column'
-        width="100%"
-        >
+        <>
+            <WidgetWrapper
+            m="2rem 0"
+            display='flex'
+            flexDirection='column'
+            width="100%"
+            >
+                
+                <Box>
+                    <Box
+                        display = "flex"
+                        justifyContent = "flex-start"
+                        alignItems = "center"
+                        gap="30px"
+                    >
+                        <UserImage image={userPicturePath} />
+                        <Typography
+                            color={main}
+                            variant="h5"
+                            fontWeight="500"
+                            sx={{
+                                "&:hover": {
+                                    color: palette.primary.light,
+                                    cursor: "pointer",
+                                },
+                            }}
+                            onClick={() => navigate(`/profile/${commentUserId}`)}
+                        >
+                            {username}
+                        </Typography>
+                    </Box>
             
-            <Box>
+                </Box>
                 <Box
-                    display = "flex"
-                    justifyContent = "flex-start"
-                    alignItems = "center"
-                    gap="30px"
-                >
-                    <UserImage image={userPicturePath} />
+                    key={postId} onClick={() => fullPage(postId)}
+                >    
                     <Typography
                         color={main}
                         variant="h5"
-                        fontWeight="500"
                         sx={{
-                            "&:hover": {
-                                color: palette.primary.light,
-                                cursor: "pointer",
-                            },
+                            mt: "1rem"
                         }}
-                        onClick={() => navigate(`/profile/${commentUserId}`)}
+                        ml={"4.4rem"}
+                        mb={"1rem"}
                     >
-                        {username}
-                    </Typography>
+                        {commentText}
+                    </Typography>              
                 </Box>
-        
-            </Box>
-            <Box
-                key={postId} onClick={() => fullPage(postId)}
-            >    
-                <Typography
-                    color={main}
-                    variant="h5"
-                    sx={{
-                        mt: "1rem"
-                    }}
-                    ml={"4.4rem"}
-                    mb={"1rem"}
-                >
-                    {commentText}
-                </Typography>              
-            </Box>
 
-            <Box
-                justifySelf="center"
-                alignSelf="center"
-            >
-            </Box>
-            <FlexBetween mt="0.25rem">
-                <FlexBetween gap="1rem">
-                    <FlexBetween gap="0.3rem">
-                        <IconButton>
-                            <ChatOutlined />
-                        </IconButton>
-                        <Typography>Reply</Typography>
+                <Box
+                    justifySelf="center"
+                    alignSelf="center"
+                >
+                </Box>
+                <FlexBetween mt="0.25rem">
+                    <FlexBetween gap="1rem">
+                        <FlexBetween gap="0.3rem">
+                            <IconButton onClick={() => setIsReplies(!isReplies)}>
+                                <ChatOutlined />
+                                <Typography>Reply</Typography>
+                            </IconButton>
+                        </FlexBetween>
+                        {isUserPoster && (
+                            <FlexBetween>
+                                <IconButton onClick={editComment}>
+                                    <EditOutlined />
+                                <Typography>Edit</Typography>
+                                </IconButton>
+                            </FlexBetween>
+                        )}
+                        {isUserPoster && (
+                            <FlexBetween>
+                                <IconButton onClick={deleteComment}>
+                                    <DeleteOutline />
+                                <Typography>Delete</Typography>
+                                </IconButton>
+                            </FlexBetween>
+                        )}
                     </FlexBetween>
-                    {isUserPoster && (
-                        <FlexBetween>
-                            <IconButton onClick={editComment}>
-                                <EditOutlined />
-                            <Typography>Edit</Typography>
-                            </IconButton>
-                        </FlexBetween>
-                    )}
-                    {isUserPoster && (
-                        <FlexBetween>
-                            <IconButton onClick={deleteComment}>
-                                <DeleteOutline />
-                            <Typography>Delete</Typography>
-                            </IconButton>
-                        </FlexBetween>
-                    )}
                 </FlexBetween>
-            </FlexBetween>
-        </WidgetWrapper>
+            </WidgetWrapper>
+            {isReplies && (
+                <Box
+                    sx={{
+                        marginLeft: "5rem",
+                        backgroundColor: "none"
+                    }}
+                >
+                    <CreateCommentWidget postId={postId} picturePath={loggedInUser.picturePath} parentCommentId={commentId} isReply={true} 
+                    />
+                    <RepliesWidget parentCommentId={commentId} />
+                </Box>
+            )}
+            
+        </>
+        
         )
 }
 

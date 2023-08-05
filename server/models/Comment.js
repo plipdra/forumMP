@@ -67,6 +67,11 @@ const CommentSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId, 
             required: true 
         },
+        parentCommentId: {
+            type: mongoose.Schema.Types.ObjectId, 
+            required: false,
+            default: null
+        },
         userId: { 
             type: mongoose.Schema.Types.ObjectId, 
             required: true 
@@ -83,6 +88,10 @@ const CommentSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId, 
             ref: 'Comment' 
         }],
+        isEdited: {
+            type: Boolean,
+            default: false
+        }
         
     },
     { timestamps: true }

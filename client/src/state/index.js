@@ -30,6 +30,7 @@ export const authSlice = createSlice({
             state.users = [];
             state.posts = [];
             state.comments = [];
+            state.replies = [];
             state.fullPost = null;
             state.editPost = null;
             state.order = "New";

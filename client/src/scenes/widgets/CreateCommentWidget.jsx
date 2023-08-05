@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts, setComments } from "state";
 
-const CreateCommentWidget = ({ postId, picturePath }) => {
+const CreateCommentWidget = ({ postId, picturePath, parentCommentId = null, isReply = false }) => {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
     const { palette } = useTheme();
@@ -43,14 +43,24 @@ const CreateCommentWidget = ({ postId, picturePath }) => {
 
         console.log(commentData)
 
-        const response = await fetch(`http://localhost:3001/comments`, {
-            method: "POST",
-            headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, userId: _id, commentText: text }),
-        });
+        if (!isReply) {
+            const response = await fetch(`http://localhost:3001/comments`, {
+                method: "POST",
+                headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ postId: postId, userId: _id, commentText: text }),
+            });
+            const comments = await response.json();
+            dispatch(setComments({ comments }));
+        } else {
+            const response = await fetch(`http://localhost:3001/comments/reply`, {
+                method: "POST",
+                headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ postId: postId, parentCommentId: parentCommentId, userId: _id, commentText: text }),
+            });
+            const comments = await response.json();
+        }
         console.log("response pending");
-        const comments = await response.json();
-        dispatch(setComments({ comments }));
+
         setText("");
     };
 
