@@ -26,6 +26,7 @@ const CommentWidget = ({
     commentUserId,
     username,
     replies,
+    isEdited,
     userPicturePath,
 }) => {
     const dispatch = useDispatch();
@@ -48,8 +49,8 @@ const CommentWidget = ({
         navigate(`/posts/${postId}`);
     }
 
-    const editComment = async () => {
-        
+    const editComment = async (postId, commentId) => {
+        navigate(`/posts/${postId}/comments/${commentId}/edit`);
     }
 
     const deleteComment = async () => {
@@ -105,6 +106,9 @@ const CommentWidget = ({
                         >
                             {username}
                         </Typography>
+                        {isEdited ? (
+                            <Typography variant="h7">(Edited)</Typography>
+                        ) : (<Typography />)}
                     </Box>
             
                 </Box>
@@ -139,7 +143,7 @@ const CommentWidget = ({
                         </FlexBetween>
                         {isUserPoster && (
                             <FlexBetween>
-                                <IconButton onClick={editComment}>
+                                <IconButton onClick={() => editComment(postId, commentId)}>
                                     <EditOutlined />
                                 <Typography>Edit</Typography>
                                 </IconButton>

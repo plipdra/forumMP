@@ -76,6 +76,18 @@ export const getComments = async (req, res) => {
     }
 }
 
+export const getComment = async (req, res) => {
+    console.log("getComment", req.params);
+    try {
+        const { commentId } = req.params;
+        const comment = await Comment.findById({_id: commentId});
+        res.status(200).json(comment);
+    } catch (err) {
+        console.log("error in getComment");
+        res.status(404).json({ message: err.message })
+    }
+}
+
 export const getReplies = async (req, res) => {
     console.log("getReplies", req.params);
     try {
@@ -134,6 +146,34 @@ export const getSearchComments = async (req, res) => {
     } catch (err) {
         console.log("error in getSearchComments")
         res.status(404).json({ message: err.message });
+    }
+}
+
+export const editComment = async (req, res) => {
+    try {
+        const { commentId } = req.params;
+        const { commentText } = req.body;
+        const comment = await Comment.findById({_id: commentId});
+
+        comment.commentText = commentText;
+
+        console.log("the text", comment.commentText);
+
+        const updatedComment = await Comment.findByIdAndUpdate(
+            commentId,
+            { commentText: comment.commentText },
+            { new: true }
+        );
+        const updatedComment2 = await Comment.findByIdAndUpdate(
+            commentId,
+            { isEdited: true },
+            { new: true }
+        );
+        console.log(updatedComment2, "comment");
+        res.status(200).json(updatedComment2);
+    } catch (err) {
+        console.log("error in editComment");
+        res.status(404).json({ message: err.message })
     }
 }
 

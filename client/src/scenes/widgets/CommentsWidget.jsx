@@ -85,6 +85,7 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
                     userId,
                     username,
                     replies,
+                    isEdited,
                     userPicturePath,
                 }, index) => (
                     <CommentWidget
@@ -95,6 +96,7 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
                         commentUserId={userId}
                         username={username}
                         replies={replies}
+                        isEdited={isEdited}
                         userPicturePath={userPicturePath}
                     />
                 )

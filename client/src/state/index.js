@@ -9,6 +9,7 @@ const initialState = {
     comments: [],
     fullPost: null,
     editPost: null,
+    editComment: null,
     order: "New",
 };
 
@@ -33,6 +34,7 @@ export const authSlice = createSlice({
             state.replies = [];
             state.fullPost = null;
             state.editPost = null;
+            state.editComment = null;
             state.order = "New";
             console.log(state.user);
         },
@@ -61,6 +63,9 @@ export const authSlice = createSlice({
         setEditPost: (state, action) => {
             state.editPost = action.payload.editPost;
         },
+        setEditComment: (state, action) => {
+            state.editComment = action.payload.editComment;
+        },
         setPost: (state, action) => {
             const updatedPosts = state.posts.map((post) => {
                 if (post._id === action.payload.post._id) {
@@ -87,5 +92,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setMode, setLogin, setLogout, setOrder, setUser, setUsers, setPosts, setEditPost, setFullPost, setPost, setComments, setComment } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setOrder, setUser, setUsers, setPosts, setEditPost, setEditComment, setFullPost, setPost, setComments, setComment } = authSlice.actions;
 export default authSlice.reducer;

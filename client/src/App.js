@@ -12,6 +12,7 @@ import UserSettings from "scenes/profilePage/settings"
 import SearchPage from "scenes/searchPage";
 import EditPost from "scenes/widgets/EditPost";
 import EditPostPage from "scenes/postPage/edit";
+import EditCommentPage from "scenes/postPage/editComment";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -30,6 +31,7 @@ function App() {
             <Route path="/profile/:userId/settings" element={<UserSettings />} />
             <Route path="/search/:value" element={<SearchPage />} />
             <Route path="/posts/:postId/edit" element={<EditPostPage />} />
+            <Route path="/posts/:postId/comments/:commentId/edit" element={<EditCommentPage />} />
             {/* <Route path="/posts/:id" render={(props) => (<PostPage id={props.match.params.id}/>)} /> */}
           </Routes>
         </ThemeProvider>
