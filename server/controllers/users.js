@@ -13,6 +13,35 @@ export const getUser = async (req, res) => {
     }
 }
 
+export const getSearchUsers = async (req, res) => {
+    console.log("Server getSearchUsers");
+    try {
+        const { query } = req.params;
+        console.log(query, "This is the query")
+       
+        let regExVal = new RegExp(`\\b${query}\\b`);
+        console.log(regExVal)
+        let user = await User.find( { $or: [ 
+            { username: { $regex: regExVal, $options: 'i' } },
+            { about: { $regex: regExVal, $options: 'i' } }
+        ]})
+
+        console.log("getting the Users...")
+
+        console.log("This is the user", user);
+
+        if (user.length > 0) {
+            console.log("went in here")
+            res.status(200).json(user);
+        } else {
+            res.status(300).json(user);
+        }
+    } catch (err) {
+        console.log("error in getSearchPosts")
+        res.status(404).json({ message: err.message });
+    }
+}
+
 export const editUser = async (req, res) => {
     console.log("editUser");
     try {

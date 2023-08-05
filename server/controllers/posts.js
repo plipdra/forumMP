@@ -115,21 +115,7 @@ export const getSearchPosts = async (req, res) => {
     try {
         const { query } = req.params;
         console.log(query, "This is the query")
-        // db.Post.createIndex({"username":1, "title":1, "description":1})
-        // let post = await Post.aggregate([
-        //     {
-        //         $text: {
-        //             $search: query,
-        //             $caseSensitive: false
-        //         }
-        //     }, {
-        //         username:1,title:1,description:1
-        //     }
-        // ]);
 
-        // console.log(post);
-        // res.status(200).json(post);
-       
         let regExVal = new RegExp(`\\b${query}\\b`);
         console.log(regExVal)
         let post = await Post.find( { $or: [ 
@@ -139,17 +125,16 @@ export const getSearchPosts = async (req, res) => {
         ]})
 
         console.log("getting the posts...")
-        // let post = await Post.find({
-        //     $or: [
-        //         {"username": {$regex: query, $options: "i"}},
-        //         {"title": {$regex: query, $options: "i"}},
-        //         {"description": {$regex: query, $options: "i"}}
-        //     ]
-        // }).toArray();
-
 
         console.log("This is the post", post);
-        res.status(200).json(post);
+        console.log("post array length", post.length)
+
+        if (post.length > 0) {
+            console.log("went in here")
+            res.status(200).json(post);
+        } else {
+            res.status(300).json(post);
+        }
     } catch (err) {
         console.log("error in getSearchPosts")
         res.status(404).json({ message: err.message });

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
@@ -9,7 +9,7 @@ const PostsResultsWidget = ({ query = null }) => {
     const filter = useSelector((state) => state.order);
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
-    let isTherePost = false;
+    const [ isTherePost, setIsTherePost ] = useState(false);
 
     const getPosts = async () => {
         console.log("This is the query ", query)
@@ -21,17 +21,23 @@ const PostsResultsWidget = ({ query = null }) => {
         dispatch(setPosts({ posts: data }));
         // dispatch(setPosts({ posts: [] }));
         console.log(posts, "getPosts (search)");
+        console.log(response.status, "status")
+        if (response.status === 200) {
+            setIsTherePost(true);
+        } else {
+            setIsTherePost(false);
+        }
     };
 
     useEffect(() => {
         getPosts();
     }, []);
 
-    if (posts) {
-        isTherePost = true;
-    } else {
-        isTherePost = false;
-    }
+    // if (posts) {
+    //     isTherePost = true;
+    // } else {
+    //     isTherePost = false;
+    // }
 
     if (!isTherePost){
         return (<Typography variant={"h3"}>No Results Found.</Typography>);
