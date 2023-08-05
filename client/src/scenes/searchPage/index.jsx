@@ -43,14 +43,13 @@ const SearchPage = () => {
                     <Box
                         m={"2rem"}
                     >
-                        <Typography variant={"h1"}>Search Results For: {console.log(value)} </Typography>
+                        <Typography variant={"h1"}>Search Results For: "{value}" </Typography>
                     </Box>
 
                     <Box
                         m={"2rem"}
                     >
                         <Typography variant={"h2"}>Users Results:</Typography>
-                        <Divider />
                         <UserResultsWidget value={value} />
                     </Box>
 
@@ -60,7 +59,6 @@ const SearchPage = () => {
                         m={"2rem"}
                     >
                         <Typography variant={"h2"}>Posts Results:</Typography>
-                        <Divider />
                         <PostsResultsWidget query={value} />
                     </Box>
 
@@ -70,7 +68,6 @@ const SearchPage = () => {
                         m={"2rem"}
                     >
                         <Typography variant={"h2"}>Comments Results:</Typography>
-                        <Divider />
                         <CommentsResultsWidget query={value} />
                     </Box>
 
