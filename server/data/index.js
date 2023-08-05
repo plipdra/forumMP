@@ -114,6 +114,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[5], true],
     ]),
+    votes: 3,
     isEdited: false,
     comments: [],
   },
@@ -132,6 +133,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[4], true],
     ]),
+    votes: 1,
     isEdited: false,
     comments: [],
   },
@@ -151,6 +153,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[4], true],
     ]),
+    votes: 2,
     isEdited: false,
     comments: [],
   },
@@ -170,6 +173,7 @@ export const posts = [
       [userIds[0], true],
       [userIds[4], true],
     ]),
+    votes: 0,
     isEdited: false,
     comments: [],
   },
@@ -191,6 +195,7 @@ export const posts = [
     downvotes: new Map([
       [userIds[3], true],
     ]),
+    votes: 4,
     isEdited: false,
     comments: [],
   },

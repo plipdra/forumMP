@@ -26,6 +26,7 @@ const PostWidget = ({
     userPicturePath,
     upvotes,
     downvotes,
+    votes,
     isEdited,
 }) => {
     const dispatch = useDispatch();
@@ -38,7 +39,6 @@ const PostWidget = ({
 
     let isUpvoted = Boolean(upvotes[loggedInUserId]);
     let isDownvoted = Boolean(downvotes[loggedInUserId]);
-    const votes = Object.keys(upvotes).length - Object.keys(downvotes).length;
 
     const { palette } = useTheme();
     const main = palette.neutral.main;

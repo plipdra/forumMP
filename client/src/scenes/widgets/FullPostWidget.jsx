@@ -44,6 +44,7 @@ const FullPostWidget = ({ postId }) => {
         userPicturePath={fullPost.userPicturePath}
         upvotes={fullPost.upvotes}
         downvotes={fullPost.downvotes}
+        votes={fullPost.votes}
         isEdited={fullPost.isEdited}
         comments={fullPost.comments}
         />

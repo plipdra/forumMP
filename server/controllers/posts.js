@@ -100,7 +100,7 @@ export const getFilteredPosts = async (req, res) => {
         if (filter === "New") {
             post = await Post.find().sort( { createdAt: -1 } );
         } else if (filter === "Trending") {
-            post = await Post.find().sort({ upvotes: -1 });
+            post = await Post.find().sort({ votes: -1 });
         }
         console.log(post);
         res.status(200).json(post);
@@ -169,17 +169,31 @@ export const upvotePost = async (req, res) => {
             console.log("went in else")
             post.upvotes.set(userId, true);
         }
+        console.log(post.upvotes.size, "upvote length", post.downvotes.size, "downvote length");
+
+        post.votes = post.upvotes.size - post.downvotes.size;
+        console.log(post.votes, "votes");
+
 
         console.log("after ifelse; ", "upvotes: ", post.upvotes, "downvotes: ", post.downvotes);
 
         const updatedPost = await Post.findByIdAndUpdate (
             postId, 
             { upvotes: post.upvotes },
+            { new: true }
+        );
+        const updatedPost2 = await Post.findByIdAndUpdate (
+            postId, 
             { downvotes: post.downvotes },
             { new: true }
         );
-        console.log(updatedPost)
-        res.status(200).json(updatedPost);
+        const updatedPost3 = await Post.findByIdAndUpdate (
+            postId, 
+            { votes: post.votes },
+            { new: true }
+        );
+        console.log(updatedPost3)
+        res.status(200).json(updatedPost3);
     } catch (err) {
         console.log("error with upvotePost");
         res.status(404).json({ message: err.message })
@@ -212,17 +226,30 @@ export const downvotePost = async (req, res) => {
             console.log("went in else")
             post.downvotes.set(userId, true);
         }
+        console.log(post.upvotes.size, "upvote length", post.downvotes.size, "downvote length");
+
+        post.votes = post.upvotes.size - post.downvotes.size;
+        console.log(post.votes, "votes");
 
         console.log("after ifelse; ", "upvotes: ", post.upvotes, "downvotes: ", post.downvotes);
 
         const updatedPost = await Post.findByIdAndUpdate (
             postId,             
             { downvotes: post.downvotes },
+            { new: true }
+        );
+        const updatedPost2 = await Post.findByIdAndUpdate (
+            postId,             
             { upvotes: post.upvotes },
             { new: true }
         );
-        console.log(updatedPost)
-        res.status(200).json(updatedPost);
+        const updatedPost3 = await Post.findByIdAndUpdate (
+            postId,             
+            { votes: post.votes },
+            { new: true }
+        );
+        console.log(updatedPost3)
+        res.status(200).json(updatedPost3);
     } catch (err) {
         console.log("error with downvotePost");
         res.status(404).json({ message: err.message })

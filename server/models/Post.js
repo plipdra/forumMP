@@ -29,6 +29,11 @@ const PostSchema = new mongoose.Schema(
             type: Map,
             of: Boolean,
         },
+        votes: {
+            type: Number,
+            default: 0,
+            required: true,
+        },
         isEdited: {
             type: Boolean,
             default: false,
