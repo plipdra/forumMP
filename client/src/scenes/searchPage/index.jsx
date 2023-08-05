@@ -5,12 +5,21 @@ import UserWidget from "scenes/widgets/UserWidget";
 import CreatePostWidget from "scenes/widgets/CreatePostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import SortWidget from "scenes/widgets/sortWidget";
+import PostsResultsWidget from "scenes/widgets/PostsResultsWidget";
 import UserResultsWidget from "scenes/widgets/UserResultsWidget";
 import CommentsWidget from "scenes/widgets/CommentsWidget";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const SearchPage = ({ value }) => {
+const SearchPage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const user = useSelector((state) => state.user);
+    const { value } = useParams();
+    console.log(value, "This is the query in index.jsx of searchPage")
+
+    // useEffect(() => {
+    //     // window.location.reload(false);
+    // }, [value]);
 
     return (
     <Box>
@@ -51,7 +60,7 @@ const SearchPage = ({ value }) => {
                     >
                         <Typography variant={"h2"}>Posts Results:</Typography>
                         <Divider />
-                        <PostsWidget isSearch={true} query={value} />
+                        <PostsResultsWidget query={value} />
                     </Box>
 
                     <Divider />
