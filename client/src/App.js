@@ -17,6 +17,7 @@ import EditCommentPage from "scenes/postPage/editComment";
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuth = Boolean(useSelector((state) => state.token));
 
   return (
     <div className="app">
@@ -25,13 +26,13 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/profile/:userId" element={<ProfilePage />} />
-            <Route path="/posts/:postId" element={<PostPage />} />
-            <Route path="/profile/:userId/settings" element={<UserSettings />} />
-            <Route path="/search/:value" element={<SearchPage />} />
-            <Route path="/posts/:postId/edit" element={<EditPostPage />} />
-            <Route path="/posts/:postId/comments/:commentId/edit" element={<EditCommentPage />} />
+            <Route path="/home" element={isAuth ? <HomePage /> : <Navigate to="/" />} />
+            <Route path="/profile/:userId" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
+            <Route path="/posts/:postId" element={isAuth ? <PostPage /> : <Navigate to="/" />} />
+            <Route path="/profile/:userId/settings" element={isAuth ? <UserSettings /> : <Navigate to="/" />} />
+            <Route path="/search/:value" element={isAuth ? <SearchPage /> : <Navigate to="/" />} />
+            <Route path="/posts/:postId/edit" element={isAuth ? <EditPostPage /> : <Navigate to="/" />} />
+            <Route path="/posts/:postId/comments/:commentId/edit" element={isAuth ? <EditCommentPage /> : <Navigate to="/" />} />
             {/* <Route path="/posts/:id" render={(props) => (<PostPage id={props.match.params.id}/>)} /> */}
           </Routes>
         </ThemeProvider>

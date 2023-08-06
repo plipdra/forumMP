@@ -6,6 +6,8 @@ import {
     useMediaQuery,
     Typography,
     useTheme,
+    Snackbar,
+    Alert,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
@@ -42,6 +44,7 @@ const initialValuesLogin = {
 
 const Form = () => {
     const [pageType, setPageType] = useState("login");
+    const [open, setOpen] = useState(false);
     const { palette } = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -49,6 +52,14 @@ const Form = () => {
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
     console.log(isLogin, "isLogin");
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    };
 
     const register = async (values, onSubmitProps) => {
         console.log("registering...");
@@ -88,14 +99,21 @@ const Form = () => {
         );
         const loggedIn = await loggedInResponse.json();
         onSubmitProps.resetForm();
-        if (loggedIn) {
-            dispatch(
-                setLogin({
-                    user: loggedIn.user,
-                    token: loggedIn.token,
-                })
-            );
-            navigate("/home");
+
+        if (loggedInResponse.status === 200) {
+            
+            if (loggedIn) {
+                dispatch(
+                    setLogin({
+                        user: loggedIn.user,
+                        token: loggedIn.token,
+                    })
+                );
+                navigate("/home"); 
+            }
+        } else {
+            console.log("went here in else")
+            setOpen(true);
         }
     }
 
@@ -237,6 +255,16 @@ const Form = () => {
                             ? "Don't have an Account? Register here!"
                             : "Already have an Account? Log in here!"}
                         </Typography>
+
+                        <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={6000} onClose={handleClose}
+                            sx={{ 
+                                width: 300
+                            }}
+                        >
+                            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                                Invalid Credentials!
+                            </Alert>
+                        </Snackbar>
                     </Box>
                 </form>
             )}

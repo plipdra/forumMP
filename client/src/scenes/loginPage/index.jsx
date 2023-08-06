@@ -21,9 +21,6 @@ const LoginPage = () => {
                     fontWeight="bold"
                     fontSize="32px"
                     color="primary"
-                    onClick={() => {
-                        navigate("/home");
-                    }}
                     sx={{
                         "&:hover": {
                             cursor: "pointer",
