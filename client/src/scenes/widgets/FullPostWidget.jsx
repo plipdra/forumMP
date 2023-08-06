@@ -9,7 +9,7 @@ const FullPostWidget = ({ postId }) => {
     const token = useSelector((state) => state.token);
 
     const getPost = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+        const response = await fetch(`/posts/${postId}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });

@@ -13,7 +13,7 @@ const PostsResultsWidget = ({ query = null }) => {
 
     const getPosts = async () => {
         console.log("This is the query ", query)
-        const response = await fetch(`http://localhost:3001/posts/search/${query}`, {
+        const response = await fetch(`/posts/search/${query}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });

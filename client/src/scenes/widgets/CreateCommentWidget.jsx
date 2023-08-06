@@ -44,7 +44,7 @@ const CreateCommentWidget = ({ postId, picturePath, parentCommentId = null, isRe
         console.log(commentData)
 
         if (!isReply) {
-            const response = await fetch(`http://localhost:3001/comments`, {
+            const response = await fetch(`/comments`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ postId: postId, userId: _id, commentText: text }),
@@ -52,7 +52,7 @@ const CreateCommentWidget = ({ postId, picturePath, parentCommentId = null, isRe
             const comments = await response.json();
             dispatch(setComments({ comments }));
         } else {
-            const response = await fetch(`http://localhost:3001/comments/reply`, {
+            const response = await fetch(`/comments/reply`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ postId: postId, parentCommentId: parentCommentId, userId: _id, commentText: text }),

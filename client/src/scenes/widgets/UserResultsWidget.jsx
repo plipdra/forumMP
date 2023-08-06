@@ -11,7 +11,7 @@ const UserResultsWidget = ({ value = null }) => {
     const [ isThereUsers, setIsThereUsers ] = useState(false);
 
     const getUsers = async () => {
-        const response = await fetch(`http://localhost:3001/users/search/${value}`, {
+        const response = await fetch(`/users/search/${value}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });

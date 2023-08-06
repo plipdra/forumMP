@@ -25,7 +25,7 @@ const UserSettings = () => {
 
     console.log(formData);
 
-    const response = await fetch(`http://localhost:3001/users/${user._id}/edit`, {
+    const response = await fetch(`/users/${user._id}/edit`, {
         method: "PATCH",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ const UserSettings = () => {
               <h3>Profile Settings</h3><br/>
               <form action="">
                 <label htmlFor="username"><b>Username:</b></label>&nbsp;&nbsp;
-                &nbsp;<InputBase type="text" placeholder={user.username} value={username} name="username" id="username"
+                &nbsp;<InputBase type="text" placeholder={'username'} value={username} name="username" id="username"
                         onChange={(e) => setUsername(e.target.value)}
                         sx={{
                           width: "100%",
@@ -96,7 +96,7 @@ const UserSettings = () => {
                         }}
                 /><br/>
                 <label htmlFor="desc"><b>Profile Description: </b></label> <br></br>
-                <InputBase multiline={true} name="desc" id="user-desc" value={about} placeholder={user.about}
+                <InputBase multiline={true} name="desc" id="user-desc" value={about} placeholder={'about'}
                   onChange={(e) => setAbout(e.target.value)}
                   sx={{
                     width: "100%",

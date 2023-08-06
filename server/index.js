@@ -62,7 +62,7 @@ app.use("/posts", postRoutes); // post pages
 app.use("/comments", commentRoutes); // comments per post
 
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001;
+const PORT = process.env.PORT || 10000;
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

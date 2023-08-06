@@ -12,7 +12,7 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
     let isThereComment = false;
 
     const getComments = async () => {
-        const response = await fetch(`http://localhost:3001/comments/${postId}/comments`, {
+        const response = await fetch(`/comments/${postId}/comments`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
@@ -24,7 +24,7 @@ const CommentsWidget = ({ postId, userId, isProfile = false, isSearch = false, q
     };
 
     const getUserComments = async () => {
-        const response = await fetch(`http://localhost:3001/comments/${userId}/user/comments`, {
+        const response = await fetch(`/comments/${userId}/user/comments`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });

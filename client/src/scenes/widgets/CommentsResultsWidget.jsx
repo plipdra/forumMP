@@ -12,7 +12,7 @@ const CommentsResultsWidget = ({ query = null }) => {
     const [ isThereComment, setIsThereComments ] = useState(false);
 
     const searchComments = async () => {
-        const response = await fetch(`http://localhost:3001/comments/search/${query}`, {
+        const response = await fetch(`/comments/search/${query}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });

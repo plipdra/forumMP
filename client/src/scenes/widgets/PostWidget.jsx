@@ -28,6 +28,7 @@ const PostWidget = ({
     downvotes,
     votes,
     isEdited,
+    isProfile = false
 }) => {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments);
@@ -45,7 +46,7 @@ const PostWidget = ({
     const primary = palette.primary.main;
 
     const patchUpvote = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}/upvote`, {
+        const response = await fetch(`/posts/${postId}/upvote`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -61,7 +62,7 @@ const PostWidget = ({
     };
 
     const patchDownvote = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}/downvote`, {
+        const response = await fetch(`/posts/${postId}/downvote`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -86,7 +87,7 @@ const PostWidget = ({
 
     const deletePost = async () => {
         const deleteComments = async () => {
-            const response = await fetch(`http://localhost:3001/comments/${postId}/comments/delete`, {
+            const response = await fetch(`/comments/${postId}/comments/delete`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -94,12 +95,15 @@ const PostWidget = ({
                 },
             });
             const message = await response.json();
+            if (!isProfile) {
+                navigate(`/home`);
+            }
             setShouldRerender(true);
         };
 
         deleteComments();
 
-        const response = await fetch(`http://localhost:3001/posts/${postId}/delete`, {
+        const response = await fetch(`/posts/${postId}/delete`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -190,7 +194,7 @@ const PostWidget = ({
                 height="auto"
                 alt="picture"
                 style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-                src={`http://localhost:3001/assets/${picturePath}`}
+                src={`/assets/${picturePath}`}
                 />
                 )}
             </Box>

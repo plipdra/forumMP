@@ -54,7 +54,7 @@ const CommentWidget = ({
     }
 
     const deleteComment = async () => {
-        const response = await fetch(`http://localhost:3001/comments/${commentId}/delete`, {
+        const response = await fetch(`/comments/${commentId}/delete`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,

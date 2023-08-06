@@ -15,7 +15,7 @@ const RepliesWidget = ({parentCommentId}) => {
 
     const getReplies = async () => {
         console.log(parentCommentId, "parentCommentId")
-        const response = await fetch(`http://localhost:3001/replies/${parentCommentId}`, {
+        const response = await fetch(`/replies/${parentCommentId}`, {
             method: "GET",
             headers: { 
                 Authorization: `Bearer ${token}`,

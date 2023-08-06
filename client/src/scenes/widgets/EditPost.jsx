@@ -21,7 +21,7 @@ const EditPost = ({ postId }) => {
   console.log(postId, "lol")
 
   const getPost = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+    const response = await fetch(`/posts/${postId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     });
@@ -32,7 +32,7 @@ const EditPost = ({ postId }) => {
   };
 
   const editPostContent = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/edit`, {
+    const response = await fetch(`/posts/${postId}/edit`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, description: description }),

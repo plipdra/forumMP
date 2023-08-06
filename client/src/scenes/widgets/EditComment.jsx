@@ -21,7 +21,7 @@ const EditComment = ({ postId, commentId }) => {
 
   const getComment = async () => {
     console.log(commentId, "commentId")
-    const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
+    const response = await fetch(`/comments/${commentId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     });
@@ -31,7 +31,7 @@ const EditComment = ({ postId, commentId }) => {
   };
 
   const editCommentContent = async () => {
-    const response = await fetch(`http://localhost:3001/comments/${commentId}/edit`, {
+    const response = await fetch(`/comments/${commentId}/edit`, {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify({ commentText: commentText }),

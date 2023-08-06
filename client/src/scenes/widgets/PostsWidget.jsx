@@ -13,7 +13,7 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
 
     const getPosts = async () => {
         console.log("This is the query ", query)
-        const response = await fetch(`http://localhost:3001/posts/search/${query}`, {
+        const response = await fetch(`/posts/search/${query}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
@@ -23,7 +23,7 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
     };
 
     const getUserPosts = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${userId}/posts`, {
+        const response = await fetch(`/posts/${userId}/posts`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
@@ -34,7 +34,7 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
 
     const getFilteredPosts = async () => {
         console.log("getFilteredPosts")
-        const response = await fetch(`http://localhost:3001/posts/order/${filter}`, {
+        const response = await fetch(`/posts/order/${filter}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}`},
         });
@@ -119,6 +119,7 @@ const PostsWidget = ({ userId, isProfile = false, isSearch = false, query = null
                         downvotes={downvotes}
                         votes={votes}
                         isEdited={isEdited}
+                        isProfile={isProfile}
                     />
                 )
             )}
