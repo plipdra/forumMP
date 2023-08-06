@@ -19,10 +19,10 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 
 const registerSchema = yup.object().shape({
-    username: yup.string().required("required"),
+    username: yup.string().required("required").min(4, 'Minimum of 4 characters').max(20, 'Maximum of 20 characters'),
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
-    picture: yup.string().notRequired(),
+    picture: yup.string(),
 });
 
 const loginSchema = yup.object().shape({
@@ -69,8 +69,13 @@ const Form = () => {
         }
 
         //when a pic is not uploaded, structure does not have picture variable
+
+        if (values.picture) {
+            formData.append('picturePath', values.picture.name);
+        } else {
+            formData.append('picturePath', 'defaultUser.png');
+        }
         console.log(values)
-        formData.append('picturePath', values.picture.name);
 
         const savedUserResponse = await fetch(
             "http://localhost:3001/auth/register",
