@@ -5,7 +5,7 @@ import DeleteUserAlert from "components/DeleteUserAlert";
 import Input from '@mui/base/Input';
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "state";
+import { setLoggedInUser, setUser } from "state";
 //TODO add settings
 const UserSettings = () => {
   const [pageType, setPageType] = useState("editProfile");
@@ -34,8 +34,8 @@ const UserSettings = () => {
         body: JSON.stringify({ username: username, about: about }),
     });
     const updatedUser = await response.json();
-    dispatch(setUser({ user: updatedUser }));
-    console.log(user);
+    dispatch(setLoggedInUser({ user: updatedUser }));
+    console.log(user, "user", updatedUser, "newUser");
     window.location.reload(false);
 };
 
@@ -86,7 +86,7 @@ const UserSettings = () => {
               <h3>Profile Settings</h3><br/>
               <form action="">
                 <label htmlFor="username"><b>Username:</b></label>&nbsp;&nbsp;
-                &nbsp;<InputBase type="text" placeholder={'username'} value={username} name="username" id="username"
+                &nbsp;<InputBase type="text" placeholder={user.username} value={username} name="username" id="username"
                         onChange={(e) => setUsername(e.target.value)}
                         sx={{
                           width: "100%",
@@ -96,7 +96,7 @@ const UserSettings = () => {
                         }}
                 /><br/>
                 <label htmlFor="desc"><b>Profile Description: </b></label> <br></br>
-                <InputBase multiline={true} name="desc" id="user-desc" value={about} placeholder={'about'}
+                <InputBase multiline={true} name="desc" id="user-desc" value={about} placeholder={user.about}
                   onChange={(e) => setAbout(e.target.value)}
                   sx={{
                     width: "100%",

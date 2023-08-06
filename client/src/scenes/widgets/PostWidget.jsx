@@ -13,7 +13,7 @@ import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost, setComments } from "state";
+import { setPost } from "state";
 import { useNavigate } from "react-router-dom";
 
 const PostWidget = ({
