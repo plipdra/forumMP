@@ -19,7 +19,7 @@ export const getSearchUsers = async (req, res) => {
         const { query } = req.params;
         console.log(query, "This is the query")
        
-        let regExVal = new RegExp(`\\b${query}\\b`);
+        let regExVal = new RegExp(`${query}`);
         console.log(regExVal)
         let user = await User.find( { $or: [ 
             { username: { $regex: regExVal, $options: 'i' } },

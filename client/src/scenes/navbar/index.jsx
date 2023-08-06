@@ -46,7 +46,7 @@ const Navbar = () => {
     // const username = "fake";
 
     if (username) {
-        return <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+        return <FlexBetween padding="1rem 6%" backgroundColor={alt} position={"sticky"} top={0}>
             <FlexBetween gap="1.75rem">
                 <Typography
                     fontWeight="bold"

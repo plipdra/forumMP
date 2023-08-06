@@ -30,6 +30,7 @@ export const SearchBar = ({ setResults }) => {
 const searchQuery = (value) => {
     setInput("");
     navigate(`/search/${value}`);
+    window.location.reload(false);
 }
 
   const handleChange = (value) => {
@@ -66,7 +67,7 @@ const searchQuery = (value) => {
             value={input}
             onChange={(e) => handleChange(e.target.value)}
         />
-        <IconButton key={input} onClick={() => searchQuery(input)} >
+        <IconButton key={input} disabled={!input} onClick={() => searchQuery(input)} >
             <Search />
         </IconButton>
     </FlexBetween>

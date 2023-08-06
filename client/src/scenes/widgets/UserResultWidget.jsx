@@ -53,7 +53,7 @@ const UserResultWidget = ({ userId, about, picturePath }) => {
     } = user;
 
     return (
-        <WidgetWrapper>
+        <WidgetWrapper margin={"1rem"}>
             {/* First Row */}
             <FlexBetween
                 gap="0.5rem"

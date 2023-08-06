@@ -25,10 +25,6 @@ const ProfilePage = () => {
     const showComms = pageType === "comments";
     console.log(pageType);
 
-
-    //get posts and comments from the server
-    const userComments = [];
-
     const getUser = async () => {
         const response = await fetch(`http://localhost:3001/users/${userId}`, {
             method: "GET",

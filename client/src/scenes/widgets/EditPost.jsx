@@ -84,7 +84,7 @@ const EditPost = ({ postId }) => {
         <Button variant="contained" className='save' disabled={!title || !description} onClick={editPostContent} >
           Confirm Edit
         </Button>
-        <Button variant="outlined" className='cancel'>
+        <Button variant="outlined" className='cancel' onClick={() => navigate(`/posts/${postId}`)}>
           Discard Changes
         </Button>
       </Stack>

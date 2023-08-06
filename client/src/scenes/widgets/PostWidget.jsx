@@ -220,7 +220,7 @@ const PostWidget = ({
                     </FlexBetween>
 
                     <FlexBetween gap="0.3rem">
-                        <IconButton>
+                        <IconButton onClick={() => fullPage(postId)}>
                             <ChatOutlined />
                         </IconButton>
                     </FlexBetween>

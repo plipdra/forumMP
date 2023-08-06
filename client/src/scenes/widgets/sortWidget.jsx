@@ -117,7 +117,7 @@ const SortWidget = ({ userId, picturePath }) => {
                             }
                         }}
                     >
-                        TRENDING
+                        TOP
                     </Button>
                 </FlexBetween>
 
