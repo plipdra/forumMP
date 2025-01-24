@@ -880,50 +880,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Verifies the Privilege",
-              "description": "",
-              "outOfScope": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Verifies the Privilege"
-            ],
-            "id": "a2ecf7ff-a373-43ec-8fca-ee3b46b62d50",
-            "source": {
-              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
-              "port": "74328655-831a-4180-8081-66fdd800cee7"
-            },
-            "target": {
-              "cell": "299cb18b-bfa1-4149-8ce3-7a06a6af4455",
-              "port": "54b2a241-2a7d-48b7-ad84-5428f2c8fcd3"
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Verified",
               "description": "",
               "outOfScope": false,
@@ -1193,6 +1149,51 @@
               "storesInventory": false,
               "threats": []
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 13,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Verifies the Privilege",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Verifies the Privilege"
+            ],
+            "id": "a2ecf7ff-a373-43ec-8fca-ee3b46b62d50",
+            "source": {
+              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
+              "port": "74328655-831a-4180-8081-66fdd800cee7"
+            },
+            "target": {
+              "cell": "299cb18b-bfa1-4149-8ce3-7a06a6af4455",
+              "port": "54b2a241-2a7d-48b7-ad84-5428f2c8fcd3"
+            },
+            "vertices": []
           }
         ]
       }
