@@ -1045,6 +1045,50 @@
               "cell": "601483ab-1300-4d7c-b884-b79182a79c4b",
               "port": "74328655-831a-4180-8081-66fdd800cee7"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Verified",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Verified"
+            ],
+            "id": "32ca2be6-f026-4733-9387-f99fee41eff1",
+            "source": {
+              "cell": "601483ab-1300-4d7c-b884-b79182a79c4b",
+              "port": "7f9b5464-1b8a-4656-b369-95291a5219c5"
+            },
+            "target": {
+              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
+              "port": "c55ee228-b340-4769-8386-1b3e6c71be1e"
+            }
           }
         ]
       }
