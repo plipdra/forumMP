@@ -928,7 +928,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Data Flow",
+              "name": "Verified",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -940,22 +940,16 @@
               "threats": []
             },
             "labels": [
-              {
-                "attrs": {
-                  "label": {
-                    "text": "Data Flow"
-                  }
-                }
-              }
+              "Verified"
             ],
-            "id": "6d7f51d5-6b96-4b23-bc3a-3fcf9dab01f6",
+            "id": "c5b4d47f-93c5-403d-aeaf-c0ec6cf69efb",
             "source": {
-              "cell": "17d3dedc-fe71-4e85-b609-3da8ca0b6e73",
-              "port": "74328655-831a-4180-8081-66fdd800cee7"
+              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
+              "port": "7f9b5464-1b8a-4656-b369-95291a5219c5"
             },
             "target": {
-              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
-              "port": "e515c1e8-7c4a-4156-9109-56570184ad78"
+              "cell": "17d3dedc-fe71-4e85-b609-3da8ca0b6e73",
+              "port": "74328655-831a-4180-8081-66fdd800cee7"
             }
           }
         ]
