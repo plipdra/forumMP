@@ -905,6 +905,50 @@
             }
           },
           {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Verified",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Verified"
+            ],
+            "id": "9e604c86-ca5a-4de4-8cfd-a31026126269",
+            "source": {
+              "cell": "299cb18b-bfa1-4149-8ce3-7a06a6af4455",
+              "port": "57fa5e57-7047-4058-8203-845fd8fc1da8"
+            },
+            "target": {
+              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
+              "port": "c55ee228-b340-4769-8386-1b3e6c71be1e"
+            }
+          },
+          {
             "position": {
               "x": 780,
               "y": 35
@@ -928,6 +972,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -1011,7 +1056,6 @@
               ]
             },
             "id": "299cb18b-bfa1-4149-8ce3-7a06a6af4455",
-            "zIndex": 11,
             "data": {
               "type": "tm.Store",
               "name": "LDAP",
@@ -1051,6 +1095,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 12,
             "ports": {
               "groups": {
                 "top": {
@@ -1134,7 +1179,6 @@
               ]
             },
             "id": "1d04683b-de72-4c55-ad0d-e724f0e2896a",
-            "zIndex": 12,
             "data": {
               "type": "tm.Store",
               "name": "SQL\nDatabase",
