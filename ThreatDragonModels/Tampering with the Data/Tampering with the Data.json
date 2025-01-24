@@ -951,6 +951,56 @@
               "cell": "17d3dedc-fe71-4e85-b609-3da8ca0b6e73",
               "port": "74328655-831a-4180-8081-66fdd800cee7"
             }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Auth Verification",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Auth Verification"
+            ],
+            "id": "d413fa0e-cb76-4e51-b0e8-d8c1412acdd1",
+            "source": {
+              "cell": "17d3dedc-fe71-4e85-b609-3da8ca0b6e73",
+              "port": "74328655-831a-4180-8081-66fdd800cee7"
+            },
+            "target": {
+              "cell": "e3555688-ad27-4c0f-b27b-9683fcd0090c",
+              "port": "e515c1e8-7c4a-4156-9109-56570184ad78"
+            },
+            "vertices": [
+              {
+                "x": 500,
+                "y": 150
+              }
+            ]
           }
         ]
       }
