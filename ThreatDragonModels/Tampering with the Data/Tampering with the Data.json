@@ -1001,6 +1001,50 @@
                 "y": 150
               }
             ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Verifies the Privilege",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Verifies the Privilege"
+            ],
+            "id": "3e7fdbe6-803d-4bde-be0c-16d3d8683d6a",
+            "source": {
+              "x": 460,
+              "y": 40
+            },
+            "target": {
+              "cell": "601483ab-1300-4d7c-b884-b79182a79c4b",
+              "port": "74328655-831a-4180-8081-66fdd800cee7"
+            }
           }
         ]
       }
